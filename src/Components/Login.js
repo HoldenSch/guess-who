@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Validation from './LoginValidation.js';
+import axios from 'axios';
 
 function Login () {
     const [values, setValues] = useState({
         username: '',
         password: ''
     })
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({})
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
@@ -14,6 +16,18 @@ function Login () {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
+        if(errors.username === "" && errors.password === "") {
+            axios.post('http://localhost:8081/login', values)
+            .then(res => {
+                if (res.data === "Success") {
+                    navigate('/home');
+                }
+                else {
+                    alert('invalid username and/or password')
+                }
+            })
+            .catch(err => console.log(err));
+        }
     }
 
     return (
