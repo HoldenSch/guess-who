@@ -15,15 +15,26 @@ const db = mysql.createConnection({
 
 app.post('/register', (req, res) => {
     const sql = "INSERT INTO users (`username`, `password`) VALUES (?)";
-    const values = [
-        req.body.username,
-        req.body.password
-    ]
-    db.query(sql, [values], (err, data) => {
+    db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if (err) {
             return res.json("Error");
         }
         return res.json(data);
+    })
+})
+
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `username` = ? AND `password` = ?";
+    db.query(sql, [req.body.username, req.body.password], (err, data) => {
+        if (err) {
+            return res.json("Error");
+        }
+        if (data.length > 0) {
+            return res.json("Success");
+        }
+        else {
+            return res.json("Fail");
+        }
     })
 })
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Components/Navbar/Navbar.js";
 import { BrowserRouter as Router, Routes, Route,} from "react-router-dom";
 import Register from './Components/Register.js';
 import Login from './Components/Login.js';
@@ -11,6 +10,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
+                <Route path='/home' element={<Home />}></Route>
             </Routes>
         </Router>
     );
