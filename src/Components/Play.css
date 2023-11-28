@@ -1,0 +1,87 @@
+h1{
+    text-align: right;
+}
+
+.startMenu {
+    width: 45vw; 
+    height: 20vh; 
+    background-color: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+.enterCode{
+    display: block;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    top: 28px;
+}
+
+#gameCode{
+    width: 31vw; 
+    height: 6vh;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.joinButton{
+    height: 6vh;
+    width: 10vw; 
+    border: none;
+    background-color: lightblue;
+    border-radius: 5px;
+    background-color: rgb(190,224,211);
+    color: white;   
+}
+
+.settingsButton{
+    color: rgba(235, 235, 235, 0.7);
+}
+
+.gameName{
+    position: relative;
+    top: 100px;
+    display:block;
+    text-align: center;
+    font-size: 7.8vw;    
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+
+body{
+    background-image: url('Images/backgroundGradient.webp');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-size: cover;
+    height: 100vh;
+}
+
+.btn-primary{
+    position: relative;
+    top: 5vh;
+    width: 41.3vw;
+    border-radius: 100px;
+    height: 5.5vh;
+    background-color: rgb(183,206,119) !important;
+    border: none !important;
+    color: white !important;
+}
+
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: local('Gilroy-Bold'), url(./Fonts/Gilroy-Bold.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Gilroy-Medium';
+    src: local('Gilroy-Medium'), url(./Fonts/Gilroy-Medium.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Gilroy-Light';
+    src: local('Gilroy-Light'), url(./Fonts/Gilroy-Light.ttf) format('truetype');
+  }
