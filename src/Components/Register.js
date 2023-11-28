@@ -18,9 +18,18 @@ function Register() {
         event.preventDefault();
         setErrors(Validation(values));
         if(errors.username === "" && errors.password === "" && errors.confirmation === "") {
-            axios.post('http://localhost:8081/register', values)
+            axios.post('http://localhost:8081/validate', values)
             .then(res => {
-                navigate('/');
+                if (res.data === "Username taken") {
+                    alert('username already taken, type another username')
+                }
+                else if (res.data === "Success") {
+                    axios.post('http://localhost:8081/register', values)
+                    .then(res =>   {
+                        navigate('/')
+                    })
+                    .catch(err => console.log(err));
+                }
             })
             .catch(err => console.log(err));
         }

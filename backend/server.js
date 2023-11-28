@@ -13,10 +13,24 @@ const db = mysql.createConnection({
     database: "guess-who"
 })
 
+app.post('/validate', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `username` = ?";
+    db.query(sql, [req.body.username], (err, data) => {
+        if (err) {
+            return res.json("Error");
+        }
+        else if (data.length > 0) {
+            return res.json("Username taken");
+        }
+        return res.json("Success")
+    })
+})
+
 app.post('/register', (req, res) => {
-    const sql = "INSERT INTO users (`username`, `password`) VALUES (?)";
+    const sql = "INSERT INTO users (`username`, `password`) VALUES (?, ?)";
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if (err) {
+            console.log(err)
             return res.json("Error");
         }
         return res.json(data);
