@@ -17,7 +17,7 @@ function Register() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
-        if(errors.name === "" && errors.password === "" && errors.confirmation === "") {
+        if(errors.username === "" && errors.password === "" && errors.confirmation === "") {
             axios.post('http://localhost:8081/register', values)
             .then(res => {
                 navigate('/');
