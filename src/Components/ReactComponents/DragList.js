@@ -96,22 +96,27 @@ function DragList() {
 
   return (
     <div style={{ marginTop: "15vh" }}>
+        <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
+          Create Your Board
+        </h1>
       <div
         style={{ display: "flex", justifyContent: "center", height: "100%" }}
       >
+      
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginRight: "8px", // If you want the entire block to have a margin on the right
+            marginRight: "8px", 
           }}
         >
           <h2
             style={{
               fontFamily: "Gilroy-Bold, sans-serif",
               fontSize: "30px",
-              marginBottom: "10px", // Optional, adds space between the title and the box
+              marginBottom: "10px",
+              color: "#363838" 
             }}
           >
             Add
@@ -120,21 +125,49 @@ function DragList() {
           <div
             style={{
               width: "18vw",
-              minHeight: "200px",
               backgroundColor: "rgba(242, 242, 242, 0.7)",
               borderRadius: "20px",
             }}
           >
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-  <input
-    type="text"
-    value={newTaskContent}
-    onChange={handleChange}
-    placeholder="Enter new task"
-    style={{ marginBottom: '10px', width: '80%' }} // Adjust width as needed
-  />
-  <button type="submit" style={{ width: '80%' }}>Add Task</button>
-</form>
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <input
+                type="text"
+                value={newTaskContent}
+                onChange={handleChange}
+                placeholder="Enter new character"
+                style={{
+                  marginBottom: "10px",
+                  width: "92%",
+                  border: "none",
+                  textIndent: "10px",
+                  fontFamily: "Gilroy-Medium, sans-serif",
+                  height: "50px",
+                  borderRadius: "8px",
+                  marginTop: "13px",
+                }} // Adjust width as needed
+              />
+              <button
+                type="submit"
+                style={{
+                  width: "92%",
+                  background: "rgb(190,224,211)",
+                  borderRadius: "8px",
+                  border: "none",
+                  height: "50px",
+                  fontFamily: "Gilroy-Medium, sans-serif",
+                  marginBottom: "13px",
+                }}
+              >
+                Add Character
+              </button>
+            </form>
           </div>
         </div>
         <DragDropContext
@@ -174,6 +207,7 @@ function DragList() {
                             minHeight: 200,
                             borderRadius: "20px",
                             fontFamily: "Gilroy-Medium, sans-serif",
+                            color: "#363838"
                           }}
                         >
                           {column.items.map((item, index) => {
@@ -217,7 +251,10 @@ function DragList() {
                                           cursor: "pointer",
                                         }}
                                       >
-                                        <i class="bi bi-x-circle" style={{color:"white"}}></i>
+                                        <i
+                                          class="bi bi-x-circle"
+                                          style={{ color: "white" }}
+                                        ></i>
                                       </button>
                                     </div>
                                   );
