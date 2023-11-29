@@ -7,10 +7,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "%",
     user: "root",
-    password: "",
-    database: "guess-who"
+    password: "}9ZYG'q'0Y\"T'xsG",
+    database: "guess-who-database"
 })
 
 app.post('/validate', (req, res) => {
