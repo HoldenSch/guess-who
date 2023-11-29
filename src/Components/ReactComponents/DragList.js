@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import holden from "../Images/holden.jpeg";
 
 const tasks = [
-  { id: "1", content: "Holden Schermer" },
-  { id: "2", content: "Sunny Liu" },
-  { id: "3", content: "Rahm Bharara" },
-  { id: "4", content: "Luke Chung" },
-  { id: "5", content: "Sabrina Zhu" },
+  { id: "1", content: "Holden Schermer", image: holden },
 ];
 
 const taskStatus = {
@@ -60,26 +57,35 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function DragList() {
   const [columns, setColumns] = useState(taskStatus);
-  const [newTaskContent, setNewTaskContent] = useState("");
+  const [newTask, setNewTask] = useState({ content: "", image: null });
 
   const handleChange = (e) => {
-    setNewTaskContent(e.target.value);
+    const { name, value } = e.target;
+    if (name === "content") {
+      setNewTask({ ...newTask, content: value });
+    } else if (name === "image") {
+      setNewTask({ ...newTask, image: e.target.files[0] });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = {
-      id: `${columns.requested.items.length + 1}`,
-      content: newTaskContent,
+    const id = `${columns.requested.items.length + 1}`;
+    const task = {
+      id,
+      content: newTask.content,
+      image: newTask.image ? URL.createObjectURL(newTask.image) : null,
     };
+
     setColumns({
       ...columns,
       requested: {
         ...columns.requested,
-        items: [...columns.requested.items, newTask],
+        items: [...columns.requested.items, task],
       },
     });
-    setNewTaskContent("");
+
+    setNewTask({ content: "", image: null });
   };
 
   const handleDelete = (columnId, itemId) => {
@@ -96,19 +102,18 @@ function DragList() {
 
   return (
     <div style={{ marginTop: "15vh" }}>
-        <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
-          Create Your Board
-        </h1>
+      <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
+        Create Your Board
+      </h1>
       <div
         style={{ display: "flex", justifyContent: "center", height: "100%" }}
       >
-      
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginRight: "8px", 
+            marginRight: "8px",
           }}
         >
           <h2
@@ -121,7 +126,6 @@ function DragList() {
           >
             Add
           </h2>
-
           <div
             style={{
               width: "18vw",
@@ -139,7 +143,8 @@ function DragList() {
             >
               <input
                 type="text"
-                value={newTaskContent}
+                name="content"
+                value={newTask.content}
                 onChange={handleChange}
                 placeholder="Enter new character"
                 style={{
@@ -151,7 +156,14 @@ function DragList() {
                   height: "50px",
                   borderRadius: "8px",
                   marginTop: "13px",
-                }} // Adjust width as needed
+                }}
+              />
+              <input
+                type="file"
+                name="image"
+                onChange={handleChange}
+                accept="image/*"
+                style={{ marginBottom: "10px", width: "92%", border: "none", color: "grey"}}
               />
               <button
                 type="submit"
@@ -163,6 +175,7 @@ function DragList() {
                   height: "50px",
                   fontFamily: "Gilroy-Medium, sans-serif",
                   marginBottom: "13px",
+                  color:"white"
                 }}
               >
                 Add Character
@@ -207,6 +220,7 @@ function DragList() {
                             minHeight: 200,
                             borderRadius: "20px",
                             fontFamily: "Gilroy-Medium, sans-serif",
+                            fontSize:"20px",
                             color: "#363838"
                           }}
                         >
@@ -225,7 +239,7 @@ function DragList() {
                                       {...provided.dragHandleProps}
                                       style={{
                                         userSelect: "none",
-                                        padding: 16,
+                                        padding: 10,
                                         margin: "8px 8px 8px 8px",
                                         minHeight: "50px",
                                         backgroundColor: snapshot.isDragging
@@ -239,7 +253,16 @@ function DragList() {
                                         alignItems: "center",
                                       }}
                                     >
-                                      {item.content}
+                                      <div>
+                                        {item.image && (
+                                          <img
+                                            src={item.image}
+                                            alt={`${item.content}'s`}
+                                            style={{ width: "60px", height: "60px",marginRight:"16px",  borderRadius: "5px", objectFit:"cover"}}
+                                          />
+                                        )}
+                                        {item.content}
+                                      </div>
                                       <button
                                         onClick={() =>
                                           handleDelete(columnId, item.id)
