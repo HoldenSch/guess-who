@@ -7,14 +7,14 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: "%",
+    host: "34.67.36.184",
     user: "root",
     password: "}9ZYG'q'0Y\"T'xsG",
     database: "guess-who-database"
 })
 
 app.post('/validate', (req, res) => {
-    const sql = "SELECT * FROM users WHERE `username` = ?";
+    const sql = "SELECT * FROM `guess-who-database`.users WHERE `username` = ?";
     db.query(sql, [req.body.username], (err, data) => {
         if (err) {
             return res.json("Error");
@@ -27,7 +27,7 @@ app.post('/validate', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    const sql = "INSERT INTO users (`username`, `password`) VALUES (?, ?)";
+    const sql = "INSERT INTO `guess-who-database`.users (`username`, `password_hash`) VALUES (?, ?);";
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if (err) {
             console.log(err)
@@ -38,7 +38,7 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM users WHERE `username` = ? AND `password` = ?";
+    const sql = "SELECT * FROM `guess-who-database`.users WHERE `username` = ? AND `password_hash` = ?";
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if (err) {
             return res.json("Error");
