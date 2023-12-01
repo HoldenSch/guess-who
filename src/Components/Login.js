@@ -8,13 +8,13 @@ function Login () {
     const [values, setValues] = useState({
         username: '',
         password: ''
-    })
-    const [errors, setErrors] = useState({})
+    });
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     // takes user input for username and password
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}));
     }
 
     // checks validity of submission
