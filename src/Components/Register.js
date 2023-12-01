@@ -9,13 +9,13 @@ function Register() {
         username: '',
         password: '',
         confirmation: ''
-    })
-    const [errors, setErrors] = useState({})
+    });
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     // takes user input for username, password, and retyped password
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}));
     }
     
     // checks validity of submission
@@ -30,14 +30,14 @@ function Register() {
             .then(res => {
                 // if username is taken, prompt the user to select new username
                 if (res.data === "Username taken") {
-                    alert('username already taken, type another username')
+                    alert('username already taken, type another username');
                 }
                 else if (res.data === "Success") {
                     // post server.js '/register' function
                     axios.post('http://localhost:8081/register', values)
                     // navigates user to the login page
                     .then(res =>   {
-                        navigate('/')
+                        navigate('/');
                     })
                     // catches any errors
                     .catch(err => console.log(err));
@@ -51,7 +51,7 @@ function Register() {
     return (
         <div className='d-flex justify-content-center algin-items-center vh-100'>
             <h1>Register for New Account</h1>
-            {/* creates registeration form with 'handleSubmit' function */}
+            {/* registeration form */}
             <form action="/register" onSubmit={handleSubmit}>
                 {/* username input */}
                 <div class="mb-3">
