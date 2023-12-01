@@ -101,7 +101,7 @@ function DragList() {
   };
 
   return (
-    <div style={{ marginTop: "15vh" }}>
+    <div style={{ marginTop: "10vh" }}>
       <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
         Create Your Board
       </h1>
@@ -121,7 +121,8 @@ function DragList() {
               fontFamily: "Gilroy-Bold, sans-serif",
               fontSize: "30px",
               marginBottom: "10px",
-              color: "#363838" 
+              color: "#363838", 
+              marginTop: "7px"
             }}
           >
             Add
@@ -181,6 +182,25 @@ function DragList() {
                 Add Character
               </button>
             </form>
+          </div>
+          <div>
+          <button
+                type="submit"
+                style={{
+                  marginTop:"15px",
+                  width: "18vw",
+                  background: " #C6a9f9",
+                  borderRadius: "20px",
+                  border: "none",
+                  height: "60px",
+                  fontFamily: "Gilroy-Bold, sans-serif",
+                  marginBottom: "13px",
+                  color:"white",
+                  fontSize: "20px",
+                }}
+              >
+                Play!
+              </button>
           </div>
         </div>
         <DragDropContext

@@ -50,7 +50,6 @@
   
   /* Setting the background of Card.Body to white */
   .flip-card-front .card-body, .flip-card-back .card-body {
-    background-color: white;
     height: 50px;   
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;

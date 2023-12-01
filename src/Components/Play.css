@@ -87,7 +87,8 @@ body{
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    height: 100vh; /* Take up the full viewport height */
+    height: 100vh; 
+    margin-top: -110px;/* Take up the full viewport height */
 }
 
 .fullBoard {
@@ -102,6 +103,57 @@ body{
 }
 
 
+
+.popup {
+    width: 40vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure it's above other elements */
+  }
+
+  .headRandom {
+    display: flex;       /* Enables Flexbox */
+    justify-content: space-between; /* Distributes space between and around content items */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 10px; /* Optional: Adds some space below this section */
+  }
+  
+
+  .randomButton {
+    width: 15% !important;
+    background-color: rgb(190,224,211) !important;
+   
+  }
+  .popupHeading{
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 2vw;
+    margin: 0;
+  }
+  
+  .popup input {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Gilroy-Medium', sans-serif;
+  }
+  
+  .popup button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(183,206,119);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-size: 1vw;
+  }
   
   
 
