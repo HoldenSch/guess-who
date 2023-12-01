@@ -3,10 +3,16 @@ import './Play.css';
 import FlipCard from './ReactComponents/FlipCard';
 import dogImage from './Images/dog.jpeg';
 import redX from './Images/redX.jpeg';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 const Board = () => {
   const [showPopup, setShowPopup] = useState(true); // State for popup visibility
-  const [userInput, setUserInput] = useState(''); // State for storing user input
+  const [userInput, setUserInput] = useState(''); 
+  const [dropdownItems, setDropdownItems] = useState([
+    "Home"
+  ]);
+
 
   // Function to handle changes in the text input
   const handleInputChange = (e) => {
@@ -16,8 +22,11 @@ const Board = () => {
   // Function to handle the submit action
   const handlePopupSubmit = () => {
     console.log(userInput); // You can replace this with any action you want to perform with the input
-    setShowPopup(false); // Hide the popup after submitting
+    setShowPopup(false); 
+    setDropdownItems([...dropdownItems, userInput]);// Hide the popup after submitting
   };
+
+  
 
   const flipCards = [
     { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
@@ -61,7 +70,25 @@ const Board = () => {
           <button onClick={handlePopupSubmit}>Enter</button>
         </div>
       )}
-      <h1 style={{ display: "block", fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginTop: "45px", textAlign:"center" }}>Guess Who!</h1>
+        <div class="boardHead">
+        <h1>Guess Who!</h1>
+        <Dropdown class="dropdown">
+    <Dropdown.Toggle variant="warning" id="dropdown-basic" className="custom-dropdown-toggle">
+        Settings
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+        {dropdownItems.map((item, index) => (
+            index === 1 ? 
+            <Dropdown.Item key={index}>{item}</Dropdown.Item> : // Second item without href
+            <Dropdown.Item href={`/${item}`} key={index}>{item}</Dropdown.Item> // Other items with href
+        ))}
+    </Dropdown.Menu>
+</Dropdown>
+
+      </div>
+
+
       <div className="fullPage">
         <div className="fullBoard">
           {flipCards.map((card, index) => (

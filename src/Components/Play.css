@@ -155,6 +155,35 @@ body{
     font-size: 1vw;
   }
   
+  .boardHead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gilroy-Bold', sans-serif;
+    position: relative;
+    left: 100px;
+}
+
+.boardHead h1 {
+    font-size: 5.8vw;
+    margin-top: 45px;
+    text-align: center;
+    margin-right: 40px; /* Adjust as needed for spacing */
+}
+
+.dropdown{
+    font-family: 'Gilroy-Medium', sans-serif;
+    position: relative;
+    top: 12px;
+    width: 200px !important;
+}
+
+
+
+
+/* Add additional styles for Dropdown as needed */
+
+
   
 
 @font-face {
