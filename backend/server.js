@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const app = express();
 app.use(cors());
 app.use(express.json());
+session_id = 0;
 
 const db = mysql.createConnection({
     host: "34.67.36.184",
@@ -51,7 +52,7 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    const sql = "SELECT password_hash FROM `guess-who-database`.users WHERE `username` = ?";
+    const sql = "SELECT * FROM `guess-who-database`.users WHERE `username` = ?";
     db.query(sql, [req.body.username], (err1, data) => {
         if (err1) {
             return res.json("Error");
@@ -59,18 +60,19 @@ app.post('/login', (req, res) => {
         if (data.length === 0) {
             return res.json("Error")
         }
-        console.log(data);
         bcrypt.compare(req.body.password.toString(), data[0].password_hash, (err2, result) => {
             if (err2) {
-              console.error('Error comparing passwords:', err2);
-              return;
+                console.error('Error comparing passwords:', err2);
+                return;
             }
             if (result) {
-              console.log('Passwords match!');
-              return res.json("Success");
+                session_id = data[0].id;
+                console.log(session_id);
+                console.log('Passwords match!');
+                return res.json('Success');
             } else {
-              console.log('Passwords do not match.');
-              return res.json("Fail");
+                console.log('Passwords do not match.');
+                return res.json("Fail");
             }
           });
     })

@@ -19,11 +19,11 @@ function Login () {
         if(errors.username === "" && errors.password === "") {
             axios.post('http://localhost:8081/login', values)
             .then(res => {
-                if (res.data === "Success") {
-                    navigate('/home');
+                if (res.data === "Fail") {
+                    alert('invalid username and/or password');
                 }
                 else {
-                    alert('invalid username and/or password')
+                    navigate('/home');
                 }
             })
             .catch(err => console.log(err));
