@@ -120,6 +120,23 @@ app.post('/delete', (req, res) => {
     });
 });
 
+// retrieves friend names for user
+app.post('/retrieve', (req, res) => {
+    if (session_id === 0) {
+        return res.json("Not Logged In");
+    }
+    const sql = "SELECT * FROM `guess-who-database`.names WHERE user_id = ?;";
+    db.query(sql, [session_id], (err1, data) => {
+        // catches error when deleting
+        if (err1) {
+            console.log(err1);
+            return res.json("Not Logged In");
+        }
+        console.log(data)
+        return res.json(data);
+    });
+});
+
 // tells app to listen to port 8081
 app.listen(8081, ()=> {
     console.log("listening");

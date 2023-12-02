@@ -3,8 +3,21 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
 
-const tasks = [
-];
+axios.post('http://localhost:8081/retrieve')
+.then(res => {
+    if (res.data === "Not Logged In") {
+      alert('please log in')
+    }
+    else {
+      let tasks = [];
+      for (let i = 0; i < res.data.length; i++) {
+        tasks.push(res.data[i])
+      }
+    }
+  })
+  // catches any error
+  .catch(err => console.log(err));
+const tasks = [{id: "0", content:"holden"}];
 
 const taskStatus = {
   requested: {
