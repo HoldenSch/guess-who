@@ -141,7 +141,28 @@ body{
     align-items: center; /* Align items vertically in the center */
     margin-bottom: 10px; /* Optional: Adds some space below this section */
   }
+
+  .joinCode, .randomCharacter{
+    font-family: 'Gilroy-Bold', sans-serif;
+  }
+
+  .randomCharacter, #character{
+    margin-top: 25px;
+  }
+
+  .disclaimer{
+    font-family: 'Gilroy-Light', sans-serif;
+  }
   
+  #character, #code{
+    font-size: 30px;
+    font-family: 'Gilroy-Bold', sans-serif;
+    color: #fbc30b;
+  }
+  
+  .shareMessage{
+    margin-top: -15px;
+  }
 
   .randomButton {
     width: 15% !important;
@@ -171,6 +192,10 @@ body{
     border-radius: 5px;
     font-family: 'Gilroy-Medium', sans-serif;
     font-size: 1vw;
+  }
+
+  .popup{
+    font-family: 'Gilroy-Medium', sans-serif;
   }
   
   .boardHead {

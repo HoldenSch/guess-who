@@ -49,7 +49,10 @@ function Play () {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
+
+        <Dropdown.Item href="/home">Home</Dropdown.Item>
+        <Dropdown.Item>Logout</Dropdown.Item>
+
       </Dropdown.Menu>
         </Dropdown>
         </div>

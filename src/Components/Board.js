@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Play.css';
 import FlipCard from './ReactComponents/FlipCard';
-import dogImage from './Images/dog.jpeg';
 import redX from './Images/redX.jpeg';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -43,16 +42,16 @@ function Board () {
       {showPopup && (
         <div className="popup">
           <div class="headRandom">
-            <h3 class="joinCode">Join Code</h3> 
+            <h3 class="joinCode">Join Code:</h3> 
             <p id="code">{code}</p>
           </div>
-          <h5>Share this with your friends!</h5>
+          <h5 class="shareMessage">Share this with your friends!</h5>
           <div class="headRandom">
-            <h3 class="randomCharacter">Your Randomized Character</h3> 
+            <h3 class="randomCharacter">Your Randomized Character:</h3> 
             <p id="character">{character}</p>
           </div>
-          <h5>Keep this a secret!</h5>
-          <p>Don't worry if you forget the join code/character, click the settings button to view them at any time!</p>
+          <h5 class="shareMessage">Keep this a secret!</h5>
+          <p class="disclaimer">Don't worry if you forget the join code/character, click the settings button to view them at any time!</p>
           <button onClick={handlePopupSubmit}>Confirm</button>
         </div>
       )}
@@ -64,11 +63,10 @@ function Board () {
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-        {dropdownItems.map((item, index) => (
-            index === 1 ? 
-            <Dropdown.Item key={index}>{item}</Dropdown.Item> : // Second item without href
-            <Dropdown.Item href={`/${item}`} key={index}>{item}</Dropdown.Item> // Other items with href
-        ))}
+        <Dropdown.Item href="/home">Home</Dropdown.Item>
+        <Dropdown.Item>Game Code: {code}</Dropdown.Item>
+        <Dropdown.Item>Answer: {character}</Dropdown.Item>
+        <Dropdown.Item>Logout</Dropdown.Item>
     </Dropdown.Menu>
 </Dropdown>
 
