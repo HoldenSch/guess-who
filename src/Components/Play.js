@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Play.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import axios from 'axios';
 
-const Play = () => {
+
+
+function Play () {
+  const [values, setValues] = useState({
+    gameCode: ''});
+  const handleInput = (event) => {
+    setValues(prev => ({...prev, [event.target.name]: [event.target.value]}));
+}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+      // posts server.js '/host_join' function
+      axios.post('http://localhost:8081/host_join', {code1: values.gameCode})
+      .then(res => {
+        // if invalid delete, prompt the user to retype
+        if (res.data === "Not Logged In") {
+          alert('please log in')
+        }
+        else if (res.data === "Code not found" || res.data === 'Error') {
+          alert('code not found, please retry')
+        }
+        else {
+           let cards = res.data
+           localStorage.setItem('cards', JSON.stringify(cards));
+            window.location.href = '/Board';
+        }
+      })
+      // catches any error
+      .catch(err => console.log(err));
+}
   return (
     <div>
       <body>
@@ -23,13 +52,14 @@ const Play = () => {
         </div>
         </div>
         <div class="startMenu">
-          <form class="enterCode">
+          <form class="enterCode" onSubmit={handleSubmit}>
             <div class="fullGame">
             <input
               type="text"
               id="gameCode"
               name="gameCode"
               placeholder="Enter Game Code"
+              onChange={handleInput}
             ></input>
             <input class="joinButton" type="submit" value="Join"></input>
             </div>
