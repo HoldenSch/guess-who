@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 let session_id = 0;
+let game_code = "";
 
 // creates connection with MySQL
 const db = mysql.createConnection({
@@ -93,13 +94,12 @@ app.post('/insert', (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
     }
-    const sql = "INSERT INTO `guess-who-database`.names (user_id, name) VALUES (?, ?);";
-    db.query(sql, [session_id, req.body.content], (err1, data) => {
+    const sql = "INSERT INTO `guess-who-database`.names (user_id, name, image) VALUES (?, ?, ?);";
+    db.query(sql, [session_id, req.body.content, req.body.image], (err1, data) => {
         // catches error when inserting
         if (err1) {
             return res.json("Error");
         }
-        console.log(data.insertId);
         return res.json(data.insertId);
     });
 });
@@ -146,9 +146,43 @@ app.post('/play', (req, res) => {
             console.log(err1)
             return res.json("Error");
         }
+        game_code = req.body.code.toString();
         return res.json(data.insertId);
     });
 });
+
+app.post('/host_join', (req, res) => {
+    if (session_id === 0) {
+        return res.json("Not Logged In");
+    }
+    const sql = "SELECT * FROM `guess-who-database`.game_codes WHERE code_name = ?;";
+    db.query(sql, [req.body.code1], (err1, data) => {
+        // catches error when inserting
+        if (err1) {
+            console.log(err1)
+            return res.json("Error");
+        }
+        let id_array = data[0].names.split(',');
+        let card_array = [];
+        const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
+        for (let i = 0; i < id_array.length; i++){
+            db.query(sql2, [id_array[i]], (err, data2) => {
+                if (err1) {
+                    console.log(err1)
+                    return res.json("Error");
+                }
+                card_array.push({name: data2[0].name, image: data2[0].image})
+                if (i === id_array.length - 1) {
+                    console.log(card_array)
+                    return res.json(card_array)
+                }
+
+            })
+        }
+        return res.json(data[0].names);
+    });
+})
+
 
 // tells app to listen to port 8081
 app.listen(8081, ()=> {
