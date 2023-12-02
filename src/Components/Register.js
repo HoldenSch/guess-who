@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Validation from './RegisterValidation.js';
 import axios from 'axios';
+import "./registerLogin.css";
 
 function Register() {
     // sets variables
@@ -49,9 +50,10 @@ function Register() {
     }
 
     return (
-        <div className='d-flex justify-content-center algin-items-center vh-100'>
-            <h1>Register for New Account</h1>
+        <div className='d-flex justify-content-center align-items-center vh-100'>
+            <h1 class="registerName">Register for New Account</h1>
             {/* registeration form */}
+            <div class="formStyle">
             <form action="/register" onSubmit={handleSubmit}>
                 {/* username input */}
                 <div class="mb-3">
@@ -72,11 +74,12 @@ function Register() {
                     {errors.confirmation && <span class='text-danger'> {errors.confirmation}</span>}
                 </div>
                 {/* submit button */}
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary registerLogin" type="submit">Register</button>
+                <div class="spacing"></div>
                 {/* login button, directs to login page */}
-                <Link to="/" class="btn btn-default border">Log In</Link>
+                <button class="btn btn-primary registerLogin"  type="submit" onClick={() => window.location.href = '/'}>Login</button>
             </form>
-
+            </div>
         </div>
     );
 }

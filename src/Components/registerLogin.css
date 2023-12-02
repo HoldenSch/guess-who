@@ -1,0 +1,46 @@
+/* Flexbox Container */
+.d-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    bottom: 50px;
+}
+
+.registerName{
+    margin-bottom: 50px !important;
+    font-size: 3.8vw !important;
+    font-family: 'Gilroy-Bold', sans-serif;
+}
+
+.registerLogin{
+    width: 100% !important;
+}
+
+.loginButton{
+    color: white !important;
+    margin-top: 10px !important;
+}
+
+.spacing{
+    margin: 10px;
+}
+
+.formStyle{
+    width: 300px !important;
+}
+
+#username, #password, #confirmation{
+    width: 300px !important;
+    font-family: 'Gilroy-Medium', sans-serif;
+}
+
+
+@media screen and (max-width: 600px) {
+    form {
+        width: 90%;
+        margin: auto;
+    }
+}
