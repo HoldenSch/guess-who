@@ -178,7 +178,7 @@ function DragList() {
           alert('please log in')
         }
         else {
-          alert('success')
+          window.location.href = '/Board'
         }
       })
       // catches any error
