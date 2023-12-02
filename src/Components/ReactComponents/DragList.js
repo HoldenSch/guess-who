@@ -70,6 +70,7 @@ const onDragEnd = (result, columns, setColumns) => {
 function DragList() {
   const [columns, setColumns] = useState(taskStatus);
   const [newTask, setNewTask] = useState({ content: "", image: null });
+  const [codes, setCodes] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -138,6 +139,22 @@ function DragList() {
       // catches any error
       .catch(err => console.log(err));
   };
+
+  const generateRandomCode = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < 6; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
+  const handlePlayClick = () => {
+    const newCode = generateRandomCode();
+    setCodes([...codes, newCode]);
+  };
+
 
   return (
     <div style={{ marginTop: "10vh" }}>
@@ -224,22 +241,29 @@ function DragList() {
           </div>
           <div>
           <button
-                type="submit"
-                style={{
-                  marginTop:"15px",
-                  width: "18vw",
-                  background: " #C6a9f9",
-                  borderRadius: "20px",
-                  border: "none",
-                  height: "60px",
-                  fontFamily: "Gilroy-Bold, sans-serif",
-                  marginBottom: "13px",
-                  color:"white",
-                  fontSize: "20px",
-                }}
-              >
-                Play!
-              </button>
+        onClick={handlePlayClick}
+        style={{
+          marginTop: "15px",
+          width: "18vw",
+          background: "#C6a9f9",
+          borderRadius: "20px",
+          border: "none",
+          height: "60px",
+          fontFamily: "Gilroy-Bold, sans-serif",
+          marginBottom: "13px",
+          color: "white",
+          fontSize: "20px",
+        }}
+      >
+        Play!
+      </button>
+
+      {/* Optional: Display generated codes */}
+      <div>
+        {codes.map((code, index) => (
+          <div key={index}>{code}</div>
+        ))}
+      </div>
           </div>
         </div>
         <DragDropContext
