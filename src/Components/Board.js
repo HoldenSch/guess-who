@@ -6,24 +6,21 @@ import redX from './Images/redX.jpeg';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 let cards = JSON.parse(localStorage.getItem('cards'));
+let code = JSON.parse(localStorage.getItem('code'));
+let character = JSON.parse(localStorage.getItem('character'));
+
 
 // window.onload = function() {
 //   console.log(cards);
 // };
 
 
-const Board = () => {
+function Board () {
   const [showPopup, setShowPopup] = useState(true); // State for popup visibility
   const [userInput, setUserInput] = useState(''); 
   const [dropdownItems, setDropdownItems] = useState([
     "Home"
   ]);
-
-
-  // Function to handle changes in the text input
-  const handleInputChange = (e) => {
-    setUserInput(e.target.value);
-  };
 
   // Function to handle the submit action
   const handlePopupSubmit = () => {
@@ -46,11 +43,17 @@ const Board = () => {
       {showPopup && (
         <div className="popup">
           <div class="headRandom">
-          <p class="popupHeading">Choose Your Character</p> 
-          <button class="randomButton">Random</button>
+            <h3 class="joinCode">Join Code</h3> 
+            <p id="code">{code}</p>
           </div>
-          <input type="text" placeholder="Enter Text Here" onChange={handleInputChange} />
-          <button onClick={handlePopupSubmit}>Enter</button>
+          <h5>Share this with your friends!</h5>
+          <div class="headRandom">
+            <h3 class="randomCharacter">Your Randomized Character</h3> 
+            <p id="character">{character}</p>
+          </div>
+          <h5>Keep this a secret!</h5>
+          <p>Don't worry if you forget the join code/character, click the settings button to view them at any time!</p>
+          <button onClick={handlePopupSubmit}>Confirm</button>
         </div>
       )}
         <div class="boardHead">
