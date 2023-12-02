@@ -5,6 +5,8 @@ import dogImage from './Images/dog.jpeg';
 import redX from './Images/redX.jpeg';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+//const {cards} = require('./ReactComponents/DragList');
+
 
 const Board = () => {
   const [showPopup, setShowPopup] = useState(true); // State for popup visibility
@@ -52,7 +54,7 @@ const Board = () => {
     { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
     { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
     { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
+
 
    
     // Add more objects as needed

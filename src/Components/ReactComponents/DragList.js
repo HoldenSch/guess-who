@@ -4,6 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
 
+
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
@@ -61,7 +62,7 @@ function DragList() {
       }
       else {
         for (let i = 0; i < res.data.length; i++) {
-          tasks.push({id: res.data[i].id.toString(), content: res.data[i].name})
+          tasks.push({id: res.data[i].id.toString(), content: res.data[i].name, image: res.data[i].image})
         }
         taskStatus = {
           requested: {
@@ -178,7 +179,24 @@ function DragList() {
           alert('please log in')
         }
         else {
-          window.location.href = '/Board'
+          axios.post('http://localhost:8081/host_join', {code1: newCode})
+          .then(res => {
+              // if invalid delete, prompt the user to retype
+              if (res.data === "Error") {
+                  alert('failed to create game, please retry');
+              }
+              else if (res.data === "Not Logged In") {
+                alert('please log in')
+              }
+              else {
+                let cards = res.data
+              // module.exports= {cards};
+                window.location.href = '/Board';
+              }
+            })
+            // catches any error
+            .catch(err => console.log(err));
+          
         }
       })
       // catches any error

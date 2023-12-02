@@ -151,37 +151,45 @@ app.post('/play', (req, res) => {
     });
 });
 
-app.post('/host_join', (req, res) => {
+app.post('/host_join', async (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
     }
-    const sql = "SELECT * FROM `guess-who-database`.game_codes WHERE code_name = ?;";
-    db.query(sql, [req.body.code1], (err1, data) => {
-        // catches error when inserting
-        if (err1) {
-            console.log(err1)
-            return res.json("Error");
-        }
-        let id_array = data[0].names.split(',');
-        let card_array = [];
-        const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
-        for (let i = 0; i < id_array.length; i++){
-            db.query(sql2, [id_array[i]], (err, data2) => {
-                if (err1) {
-                    console.log(err1)
-                    return res.json("Error");
-                }
-                card_array.push({name: data2[0].name, image: data2[0].image})
-                if (i === id_array.length - 1) {
-                    console.log(card_array)
-                    return res.json(card_array)
-                }
+    try {
+        const sql = "SELECT * FROM `guess-who-database`.game_codes WHERE code_name = ?;";
+        const gameCodesResult = await dbPromiseQuery(sql, [req.body.code1]);
 
-            })
+        if (gameCodesResult.length === 0) {
+            return res.json("Code not found");
         }
-        return res.json(data[0].names);
+
+        let id_array = gameCodesResult[0].names.split(',');
+        let card_array = [];
+
+        for (let id of id_array) {
+            const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
+            const namesResult = await dbPromiseQuery(sql2, [id]);
+            card_array.push({ name: namesResult[0].name, image: namesResult[0].image });
+        }
+        console.log(card_array)
+        res.json(card_array);
+    } catch (err) {
+        console.error(err);
+        res.json("Error");
+    }
+});
+
+function dbPromiseQuery(sql, params) {
+    return new Promise((resolve, reject) => {
+        db.query(sql, params, (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
     });
-})
+}
 
 
 // tells app to listen to port 8081
