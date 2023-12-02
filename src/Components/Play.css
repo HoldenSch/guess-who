@@ -47,14 +47,31 @@ h1{
     margin-right: 20px;
 }
 
-.gameName{
+.gameName {
+    display: flex;
+    justify-content: center;
     position: relative;
     top: 100px;
-    display:block;
-    text-align: center;
-    font-size: 7.8vw;    
+    left: 90px;
+    font-size: 7.8vw;
     font-family: 'Gilroy-Bold', sans-serif;
+    margin: 0;
 }
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+}
+
+.gameName p {
+    margin-right: 40px; /* Adjust the spacing between the text and the dropdown */
+}
+
+.dropdown1{
+    position: relative;
+    bottom: 30px;
+}
+
 
 body{
     background-image: url('Images/backgroundGradient.webp');
@@ -178,6 +195,7 @@ body{
     top: 12px;
     width: 200px !important;
 }
+
 
 
 

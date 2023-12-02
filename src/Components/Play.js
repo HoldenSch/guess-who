@@ -6,19 +6,21 @@ const Play = () => {
   return (
     <div>
       <body>
-        <div class="gameName">
-          <p>Guess Who!</p>
-          <Dropdown class="dropdown">
-          <Dropdown.Toggle variant="warning" id="dropdown-basic">
+      <div class="gameName">
+  <div class="headerContainer">
+    <p>Guess Who!</p>
+    <div class="dropdown1">
+    <Dropdown>
+          <Dropdown.Toggle variant="warning" id="dropdown-basic" class="playdropdown">
             Settings
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
       </Dropdown.Menu>
         </Dropdown>
+        </div>
+        </div>
         </div>
         <div class="startMenu">
           <form class="enterCode">
