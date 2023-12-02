@@ -19,11 +19,6 @@
     width: 100% !important;
 }
 
-.loginButton{
-    color: white !important;
-    margin-top: 10px !important;
-}
-
 .spacing{
     margin: 10px;
 }
@@ -36,7 +31,6 @@
     width: 300px !important;
     font-family: 'Gilroy-Medium', sans-serif;
 }
-
 
 @media screen and (max-width: 600px) {
     form {

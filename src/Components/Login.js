@@ -43,7 +43,7 @@ function Login () {
 
     return (
         <div className='d-flex justify-content-center algin-items-center vh-100'>
-            <h1>Login</h1>
+            <h1 class="registerName">Login</h1>
             {/* login form */}
             <form action="" onSubmit={handleSubmit}>
                 {/* username input */}
