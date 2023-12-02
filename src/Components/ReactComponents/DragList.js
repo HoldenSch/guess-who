@@ -5,7 +5,7 @@ import holden from "../Images/holden.jpeg";
 import axios from 'axios';
 
 const tasks = [
-  { id: "1", content: "Holden Schermer", image: holden },
+ 
 ];
 
 const taskStatus = {
@@ -71,7 +71,7 @@ function DragList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = `${columns.requested.items.length + 1}`;
+    const id = `task-${new Date().getTime()}`;
     const task = {
       id,
       content: newTask.content,
