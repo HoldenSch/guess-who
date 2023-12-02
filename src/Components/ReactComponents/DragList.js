@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
@@ -162,9 +163,26 @@ function DragList() {
     return result;
   };
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (event) => {
+    event.preventDefault();
     const newCode = generateRandomCode();
+    const ids = getIncludeColumnIds();
     setCodes([...codes, newCode]);
+    axios.post('http://localhost:8081/play', {code: newCode, friends: ids})
+    .then(res => {
+        // if invalid delete, prompt the user to retype
+        if (res.data === "Error") {
+            alert('failed to create game, please retry');
+        }
+        else if (res.data === "Not Logged In") {
+          alert('please log in')
+        }
+        else {
+          alert('success')
+        }
+      })
+      // catches any error
+      .catch(err => console.log(err));
   };
 
   const getIncludeColumnIds = () => {
@@ -180,12 +198,6 @@ function DragList() {
       return [];
     }
   };
-
-  const handleButtonClick = () => {
-    const ids = getIncludeColumnIds();
-    console.log(ids);
-    // Perform any other action with the ids
-  };
   
 
 
@@ -195,9 +207,6 @@ function DragList() {
       <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
         Create Your Board
       </h1>
-      <button onClick={handleButtonClick}>
-        Get IDs in Include Column
-      </button>
       <div
         style={{ display: "flex", justifyContent: "center", height: "100%" }}
       >
@@ -279,6 +288,7 @@ function DragList() {
           <div>
           <button
         onClick={handlePlayClick}
+        type="submit"
         style={{
           marginTop: "15px",
           width: "18vw",
