@@ -57,7 +57,7 @@ app.post('/register', (req, res) => {
                 return res.json(data);
             });
         });
-      });
+    });
 });
 
 // logs the user in
@@ -84,11 +84,13 @@ app.post('/login', (req, res) => {
             else {
                 return res.json("Fail");
             }
-          });
+        });
     })
-})
+});
+
+
 
 // tells app to listen to port 8081
 app.listen(8081, ()=> {
     console.log("listening");
-})
+});
