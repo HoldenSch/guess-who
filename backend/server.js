@@ -129,10 +129,8 @@ app.post('/retrieve', (req, res) => {
     db.query(sql, [session_id], (err1, data) => {
         // catches error when deleting
         if (err1) {
-            console.log(err1);
             return res.json("Not Logged In");
         }
-        console.log(data)
         return res.json(data);
     });
 });
