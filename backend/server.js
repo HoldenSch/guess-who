@@ -135,6 +135,21 @@ app.post('/retrieve', (req, res) => {
     });
 });
 
+app.post('/play', (req, res) => {
+    if (session_id === 0) {
+        return res.json("Not Logged In");
+    }
+    const sql = "INSERT INTO guess-who-database.game_codes (user_id, code_name, names) VALUES (?, ?, ?);";
+    db.query(sql, [session_id, req.body.code, req.body.friends.toString()], (err1, data) => {
+        // catches error when inserting
+        if (err1) {
+            console.log(err1)
+            return res.json("Error");
+        }
+        return res.json(data.insertId);
+    });
+});
+
 // tells app to listen to port 8081
 app.listen(8081, ()=> {
     console.log("listening");
