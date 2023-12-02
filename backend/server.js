@@ -88,6 +88,22 @@ app.post('/login', (req, res) => {
     })
 });
 
+// inserts name for user
+app.post('/insert', (req, res) => {
+    if (session_id === 0) {
+        return res.json("Not Logged In");
+    }
+    const sql = "INSERT INTO `guess-who-database`.names (user_id, name) VALUES (?, ?);";
+    db.query(sql, [session_id, req.body.content], (err1, data) => {
+        // catches error when inserting
+        if (err1) {
+            return res.json("Error");
+        }
+        console.log(data.insertId);
+        return res.json(data.insertId);
+    });
+});
+
 
 
 // tells app to listen to port 8081
