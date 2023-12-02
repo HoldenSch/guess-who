@@ -5,7 +5,11 @@ import dogImage from './Images/dog.jpeg';
 import redX from './Images/redX.jpeg';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-//const {cards} = require('./ReactComponents/DragList');
+let cards = JSON.parse(localStorage.getItem('cards'));
+
+// window.onload = function() {
+//   console.log(cards);
+// };
 
 
 const Board = () => {
@@ -30,35 +34,12 @@ const Board = () => {
 
   
 
-  const flipCards = [
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-    { frontImage: dogImage, frontTitle: "Front Title 1", backImage: redX, backTitle: "" },
-
-
-   
-    // Add more objects as needed
-  ];
+  const flipCards = cards.map(card => ({
+    frontImage: card.image,
+    frontTitle: card.name,
+    backImage: redX,
+    backTitle: ""
+}));
 
   return (
     <div>

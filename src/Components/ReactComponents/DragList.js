@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
+
 
 
 const onDragEnd = (result, columns, setColumns) => {
@@ -189,9 +189,10 @@ function DragList() {
                 alert('please log in')
               }
               else {
-                let cards = res.data
-              // module.exports= {cards};
-                window.location.href = '/Board';
+                 let cards = res.data
+                 localStorage.setItem('cards', JSON.stringify(cards));
+                  window.location.href = '/Board';
+                 
               }
             })
             // catches any error

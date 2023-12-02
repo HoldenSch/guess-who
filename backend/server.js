@@ -171,7 +171,6 @@ app.post('/host_join', async (req, res) => {
             const namesResult = await dbPromiseQuery(sql2, [id]);
             card_array.push({ name: namesResult[0].name, image: namesResult[0].image });
         }
-        console.log(card_array)
         res.json(card_array);
     } catch (err) {
         console.error(err);
