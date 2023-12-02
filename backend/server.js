@@ -104,7 +104,21 @@ app.post('/insert', (req, res) => {
     });
 });
 
-
+// deletes name for user
+app.post('/delete', (req, res) => {
+    if (session_id === 0) {
+        return res.json("Not Logged In");
+    }
+    const sql = "DELETE FROM `guess-who-database`.names WHERE id = ?;";
+    db.query(sql, [req.body.id], (err1, data) => {
+        // catches error when deleting
+        if (err1) {
+            console.log(err1);
+            return res.json("Error");
+        }
+        return res.json(data);
+    });
+});
 
 // tells app to listen to port 8081
 app.listen(8081, ()=> {

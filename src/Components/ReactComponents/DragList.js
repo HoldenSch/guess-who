@@ -76,7 +76,7 @@ function DragList() {
     };
     axios.post('http://localhost:8081/insert', task)
     .then(res => {
-        // if invalid login, prompt the user to retype
+        // if invalid insert, prompt the user to retype
         if (res.data === "Error") {
             alert('failed to add friend, please retry');
         }
@@ -101,15 +101,29 @@ function DragList() {
   };
 
   const handleDelete = (columnId, itemId) => {
-    const column = columns[columnId];
-    const filteredItems = column.items.filter((item) => item.id !== itemId);
-    setColumns({
-      ...columns,
-      [columnId]: {
-        ...column,
-        items: filteredItems,
-      },
-    });
+    axios.post('http://localhost:8081/delete', {id: itemId})
+    .then(res => {
+        // if invalid delete, prompt the user to retype
+        if (res.data === "Error") {
+            alert('failed to delete friend, please retry');
+        }
+        else if (res.data === "Not Logged In") {
+          alert('please log in')
+        }
+        else {
+          const column = columns[columnId];
+          const filteredItems = column.items.filter((item) => item.id !== itemId);
+          setColumns({
+            ...columns,
+            [columnId]: {
+              ...column,
+              items: filteredItems,
+            },
+          });
+        }
+      })
+      // catches any error
+      .catch(err => console.log(err));
   };
 
   return (
