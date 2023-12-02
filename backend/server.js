@@ -165,13 +165,14 @@ app.post('/host_join', async (req, res) => {
 
         let id_array = gameCodesResult[0].names.split(',');
         let card_array = [];
+        let random = Math.floor(Math.random() * id_array.length)
 
         for (let id of id_array) {
             const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
             const namesResult = await dbPromiseQuery(sql2, [id]);
             card_array.push({ name: namesResult[0].name, image: namesResult[0].image });
         }
-        res.json(card_array);
+        res.json([card_array, req.body.code1, card_array[random].name]);
     } catch (err) {
         console.error(err);
         res.json("Error");

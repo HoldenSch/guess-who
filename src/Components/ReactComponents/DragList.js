@@ -171,7 +171,7 @@ function DragList() {
     setCodes([...codes, newCode]);
     axios.post('http://localhost:8081/play', {code: newCode, friends: ids})
     .then(res => {
-        // if invalid delete, prompt the user to retype
+        // if invalid play, prompt the user to retype
         if (res.data === "Error") {
             alert('failed to create game, please retry');
         }
@@ -189,10 +189,13 @@ function DragList() {
                 alert('please log in')
               }
               else {
-                 let cards = res.data
+                 let cards = res.data[0]
+                 let code = res.data[1]
+                 let character = res.data[2]
                  localStorage.setItem('cards', JSON.stringify(cards));
+                 localStorage.setItem('code', JSON.stringify(code));
+                 localStorage.setItem('character', JSON.stringify(character));
                   window.location.href = '/Board';
-                 
               }
             })
             // catches any error

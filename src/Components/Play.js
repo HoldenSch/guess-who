@@ -14,7 +14,7 @@ function Play () {
   const handleSubmit = (event) => {
     event.preventDefault();
       // posts server.js '/host_join' function
-      axios.post('http://localhost:8081/host_join', {code1: values.gameCode})
+      axios.post('http://localhost:8081/host_join', {code1: values.gameCode.toString()})
       .then(res => {
         // if invalid delete, prompt the user to retype
         if (res.data === "Not Logged In") {
@@ -24,9 +24,13 @@ function Play () {
           alert('code not found, please retry')
         }
         else {
-           let cards = res.data
-           localStorage.setItem('cards', JSON.stringify(cards));
-            window.location.href = '/Board';
+          let cards = res.data[0]
+          let code = res.data[1]
+          let character = res.data[2]
+          localStorage.setItem('cards', JSON.stringify(cards));
+          localStorage.setItem('code', JSON.stringify(code));
+          localStorage.setItem('character', JSON.stringify(character));
+           window.location.href = '/Board';
         }
       })
       // catches any error
