@@ -139,7 +139,7 @@ app.post('/play', (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
     }
-    const sql = "INSERT INTO guess-who-database.game_codes (user_id, code_name, names) VALUES (?, ?, ?);";
+    const sql = "INSERT INTO `guess-who-database`.game_codes (user_id, code_name, names) VALUES (?, ?, ?);";
     db.query(sql, [session_id, req.body.code, req.body.friends.toString()], (err1, data) => {
         // catches error when inserting
         if (err1) {
