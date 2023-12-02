@@ -167,12 +167,37 @@ function DragList() {
     setCodes([...codes, newCode]);
   };
 
+  const getIncludeColumnIds = () => {
+    // Assuming 'toDo' is the key for the 'Include' column
+    const includeColumn = columns['toDo'];
+  
+    // Check if the column exists and has items
+    if (includeColumn && includeColumn.items) {
+      // Map over the items and extract their IDs
+      return includeColumn.items.map(item => item.id);
+    } else {
+      // Return an empty array if the column is not found or has no items
+      return [];
+    }
+  };
+
+  const handleButtonClick = () => {
+    const ids = getIncludeColumnIds();
+    console.log(ids);
+    // Perform any other action with the ids
+  };
+  
+
+
 
   return (
     <div style={{ marginTop: "10vh" }}>
       <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
         Create Your Board
       </h1>
+      <button onClick={handleButtonClick}>
+        Get IDs in Include Column
+      </button>
       <div
         style={{ display: "flex", justifyContent: "center", height: "100%" }}
       >

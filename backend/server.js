@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-session_id = 0;
+let session_id = 0;
 
 // creates connection with MySQL
 const db = mysql.createConnection({
