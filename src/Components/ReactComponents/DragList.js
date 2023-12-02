@@ -3,33 +3,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
 
-axios.post('http://localhost:8081/retrieve')
-.then(res => {
-    if (res.data === "Not Logged In") {
-      alert('please log in')
-    }
-    else {
-      let tasks = [];
-      for (let i = 0; i < res.data.length; i++) {
-        tasks.push(res.data[i])
-      }
-    }
-  })
-  // catches any error
-  .catch(err => console.log(err));
-const tasks = [{id: "0", content:"holden"}];
-
-const taskStatus = {
-  requested: {
-    name: "Exclude",
-    items: tasks,
-  },
-  toDo: {
-    name: "Include",
-    items: [],
-  },
-};
-
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
@@ -68,6 +41,45 @@ const onDragEnd = (result, columns, setColumns) => {
 };
 
 function DragList() {
+  let tasks = [];
+  let taskStatus = {
+    requested: {
+      name: "Exclude",
+      items: tasks,
+    },
+    toDo: {
+      name: "Include",
+      items: [],
+    },
+  };
+  window.onload = function() {
+    axios.post('http://localhost:8081/retrieve')
+    .then(res => {
+      if (res.data === "Not Logged In") {
+        alert('please log in')
+      }
+      else {
+        for (let i = 0; i < res.data.length; i++) {
+          tasks.push({id: res.data[i].id.toString(), content: res.data[i].name})
+        }
+        taskStatus = {
+          requested: {
+            name: "Exclude",
+            items: tasks,
+          },
+          toDo: {
+            name: "Include",
+            items: [],
+          },
+        };
+        setColumns(taskStatus)
+      }
+    })
+  // catches any error
+  .catch(err => console.log(err));
+
+  };
+
   const [columns, setColumns] = useState(taskStatus);
   const [newTask, setNewTask] = useState({ content: "", image: null });
   const [codes, setCodes] = useState([]);

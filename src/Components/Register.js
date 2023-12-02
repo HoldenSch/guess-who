@@ -77,7 +77,7 @@ function Register() {
                 <button class="btn btn-primary registerLogin" type="submit">Register</button>
                 <div class="spacing"></div>
                 {/* login button, directs to login page */}
-                <button class="btn btn-primary registerLogin"  type="submit" onClick={() => window.location.href = '/'}>Login</button>
+                <Link to="/" class="btn btn-primary registerLogin"  type="submit" onClick={() => window.location.href = '/'}>Login</Link>
             </form>
             </div>
         </div>
