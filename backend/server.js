@@ -98,6 +98,7 @@ app.post('/insert', (req, res) => {
     db.query(sql, [session_id, req.body.content, req.body.image], (err1, data) => {
         // catches error when inserting
         if (err1) {
+
             return res.json("Error");
         }
         return res.json(data.insertId);
