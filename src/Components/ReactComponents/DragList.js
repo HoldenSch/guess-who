@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import holden from "../Images/holden.jpeg";
-import axios from 'axios';
 
 const tasks = [
- 
+  { id: "1", content: "Holden Schermer", image: holden },
 ];
 
 const taskStatus = {
@@ -71,35 +70,22 @@ function DragList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = `task-${new Date().getTime()}`;
+    const id = `${columns.requested.items.length + 1}`;
     const task = {
       id,
       content: newTask.content,
       image: newTask.image ? URL.createObjectURL(newTask.image) : null,
     };
-    axios.post('http://localhost:8081/insert', task)
-    .then(res => {
-        // if invalid login, prompt the user to retype
-        if (res.data === "Fail") {
-            alert('failed to add friend, please retry');
-        }
-        else if (res.data === "Not Logged In") {
-          alert('please log in');
-        }
-        else {
-            setColumns({
-              ...columns,
-              requested: {
-                ...columns.requested,
-                items: [...columns.requested.items, task],
-              },
-            });
-        
-            setNewTask({ content: "", image: null });
-        }
-      })
-      // catches any error
-      .catch(err => console.log(err));
+
+    setColumns({
+      ...columns,
+      requested: {
+        ...columns.requested,
+        items: [...columns.requested.items, task],
+      },
+    });
+
+    setNewTask({ content: "", image: null });
   };
 
   const handleDelete = (columnId, itemId) => {

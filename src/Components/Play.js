@@ -1,16 +1,24 @@
 import React from "react";
-import { IoIosSettings } from "react-icons/io";
 import "./Play.css";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Play = () => {
   return (
-    <div class="fullPage">
-      <h1>
-        <IoIosSettings class="settingsButton" />
-      </h1>
+    <div>
       <body>
         <div class="gameName">
           <p>Guess Who!</p>
+          <Dropdown class="dropdown">
+          <Dropdown.Toggle variant="warning" id="dropdown-basic">
+            Settings
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </Dropdown.Menu>
+        </Dropdown>
         </div>
         <div class="startMenu">
           <form class="enterCode">
@@ -25,7 +33,7 @@ const Play = () => {
             </div>
           </form>
           <div class="createRoom d-grid gap-2 col-11 mx-auto" >
-            <button class="btn btn-primary" type="button">
+            <button class="btn btn-primary" type="button"  onClick={() => window.location.href = '/Room'}>
               Create Private Room
             </button>
           </div>

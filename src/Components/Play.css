@@ -91,6 +91,7 @@ body{
     margin-top: -110px;/* Take up the full viewport height */
 }
 
+
 .fullBoard {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap */
