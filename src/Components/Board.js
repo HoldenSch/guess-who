@@ -3,6 +3,7 @@ import './Play.css';
 import FlipCard from './ReactComponents/FlipCard';
 import redX from './Images/redX.jpeg';
 import Dropdown from 'react-bootstrap/Dropdown';
+import axios from 'axios';
 
 let cards = JSON.parse(localStorage.getItem('cards'));
 let code = JSON.parse(localStorage.getItem('code'));
@@ -28,7 +29,19 @@ function Board () {
     setDropdownItems([...dropdownItems, userInput]);// Hide the popup after submitting
   };
 
-  
+  const handleLogout = () => {
+    axios.post('http://localhost:8081/logout')
+    .then(res => {
+      if (res.data === "Success"){
+        window.location.href = '/';
+      }
+      else {
+        alert('error logging out');
+      }
+      })
+      // catches any error
+      .catch(err => console.log(err));
+  };
 
   const flipCards = cards.map(card => ({
     frontImage: card.image,
@@ -66,7 +79,7 @@ function Board () {
         <Dropdown.Item href="/home">Home</Dropdown.Item>
         <Dropdown.Item>Game Code: {code}</Dropdown.Item>
         <Dropdown.Item>Answer: {character}</Dropdown.Item>
-        <Dropdown.Item>Logout</Dropdown.Item>
+        <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
     </Dropdown.Menu>
 </Dropdown>
 

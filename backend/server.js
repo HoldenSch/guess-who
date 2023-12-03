@@ -222,6 +222,11 @@ function dbPromiseQuery(sql, params) {
     });
 }
 
+app.post('/logout', (req, res) => {
+    session_id = 0;
+    return res.json("Success");
+});
+
 
 // tells app to listen to port 8081
 app.listen(8081, ()=> {

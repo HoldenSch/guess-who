@@ -36,6 +36,19 @@ function Play () {
       // catches any error
       .catch(err => console.log(err));
 }
+const handleLogout = () => {
+  axios.post('http://localhost:8081/logout')
+  .then(res => {
+    if (res.data === "Success"){
+      window.location.href = '/';
+    }
+    else {
+      alert('error logging out');
+    }
+    })
+    // catches any error
+    .catch(err => console.log(err));
+};
   return (
     <div>
       <body>
@@ -51,7 +64,7 @@ function Play () {
           <Dropdown.Menu>
 
         <Dropdown.Item href="/home">Home</Dropdown.Item>
-        <Dropdown.Item>Logout</Dropdown.Item>
+        <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 
       </Dropdown.Menu>
         </Dropdown>
