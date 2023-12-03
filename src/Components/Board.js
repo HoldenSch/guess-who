@@ -10,29 +10,26 @@ let code = JSON.parse(localStorage.getItem('code'));
 let character = JSON.parse(localStorage.getItem('character'));
 
 
-// window.onload = function() {
-//   console.log(cards);
-// };
-
-
 function Board () {
-  const [showPopup, setShowPopup] = useState(true); // State for popup visibility
+  const [showPopup, setShowPopup] = useState(true); // state for popup visibility
   const [userInput, setUserInput] = useState(''); 
   const [dropdownItems, setDropdownItems] = useState([
     "Home"
   ]);
 
-  // Function to handle the submit action
+  // handles user clicking 'confirm'
   const handlePopupSubmit = () => {
-    console.log(userInput); // You can replace this with any action you want to perform with the input
+    console.log(userInput);
     setShowPopup(false); 
-    setDropdownItems([...dropdownItems, userInput]);// Hide the popup after submitting
+    setDropdownItems([...dropdownItems, userInput]);// hide the popup after submitting
   };
 
+  // handles user clicking log out
   const handleLogout = () => {
     axios.post('http://localhost:8081/logout')
     .then(res => {
       if (res.data === "Success"){
+        // redirects user
         window.location.href = '/';
       }
       else {

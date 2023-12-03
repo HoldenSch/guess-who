@@ -148,6 +148,7 @@ app.post('/retrieve', (req, res) => {
         if (err1) {
             return res.json("Not Logged In");
         }
+        // converting blob into image
         const dataWithBase64Images = results.map(item => {
             let imageBase64 = '';
             if (item.image && Buffer.isBuffer(item.image)) {
@@ -159,7 +160,7 @@ app.post('/retrieve', (req, res) => {
     });
 });
 
-
+// confirms start of game
 app.post('/play', (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
@@ -176,11 +177,13 @@ app.post('/play', (req, res) => {
     });
 });
 
+// lets users to join the host code
 app.post('/host_join', async (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
     }
     try {
+        // gets code name from databaes
         const sql = "SELECT * FROM `guess-who-database`.game_codes WHERE code_name = ?;";
         const gameCodesResult = await dbPromiseQuery(sql, [req.body.code1]);
 
@@ -192,6 +195,7 @@ app.post('/host_join', async (req, res) => {
         let card_array = [];
         let random = Math.floor(Math.random() * id_array.length)
 
+        // gets the name and image from the user
         for (let id of id_array) {
             const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
             const namesResult = await dbPromiseQuery(sql2, [id]);
@@ -199,6 +203,7 @@ app.post('/host_join', async (req, res) => {
             if (namesResult[0].image && Buffer.isBuffer(namesResult[0].image)) {
                 imageBase64 = `data:image/jpeg;base64,${namesResult[0].image.toString('base64')}`;
             }
+            // adds information to array
             card_array.push({ name: namesResult[0].name, image: imageBase64 });
         }
         res.json([card_array, req.body.code1, card_array[random].name]);
@@ -208,7 +213,7 @@ app.post('/host_join', async (req, res) => {
     }
 });
 
-
+// checks for error when retrieving game codes
 function dbPromiseQuery(sql, params) {
     return new Promise((resolve, reject) => {
         db.query(sql, params, (err, results) => {
@@ -221,7 +226,9 @@ function dbPromiseQuery(sql, params) {
     });
 }
 
+// logs user out
 app.post('/logout', (req, res) => {
+    // resets session id
     session_id = 0;
     return res.json("Success");
 });

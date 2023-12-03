@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import './FlipCard.css'; // Make sure this CSS file is linked
+import './FlipCard.css';
 
 const FlipCard = ({ frontImage, frontTitle, backImage, backTitle }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -16,7 +16,6 @@ const FlipCard = ({ frontImage, frontTitle, backImage, backTitle }) => {
           <Card>
             <Card.Img variant="top" src={frontImage} className="card-img-custom" />
             <Card.Body>
-              {/* Apply the custom class to your titles */}
               <Card.Title className="card-title-custom">{frontTitle}</Card.Title>
             </Card.Body>
           </Card>
@@ -25,7 +24,6 @@ const FlipCard = ({ frontImage, frontTitle, backImage, backTitle }) => {
           <Card>
             <Card.Img variant="top" src={backImage} className="card-img-custom" />
             <Card.Body>
-              {/* Apply the custom class to your titles */}
               <Card.Title className="card-title-custom">{backTitle}</Card.Title>
             </Card.Body>
           </Card>

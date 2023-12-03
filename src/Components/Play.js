@@ -24,6 +24,7 @@ function Play () {
           alert('code not found, please retry')
         }
         else {
+          // sets up the board
           let cards = res.data[0]
           let code = res.data[1]
           let character = res.data[2]
@@ -36,10 +37,12 @@ function Play () {
       // catches any error
       .catch(err => console.log(err));
 }
+// handles user logout
 const handleLogout = () => {
   axios.post('http://localhost:8081/logout')
   .then(res => {
     if (res.data === "Success"){
+      // redirects to login page
       window.location.href = '/';
     }
     else {

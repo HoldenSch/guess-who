@@ -7,7 +7,7 @@ import axios from 'axios';
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
-
+  // if dragged to other box, switch the item to other box
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
@@ -27,6 +27,7 @@ const onDragEnd = (result, columns, setColumns) => {
       },
     });
   } else {
+    // otherwise, keep the box in same box
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
     const [removed] = copiedItems.splice(source.index, 1);
@@ -42,6 +43,7 @@ const onDragEnd = (result, columns, setColumns) => {
 };
 
 function DragList() {
+  // sets up exclude and include arrays
   let tasks = [];
   let taskStatus = {
     requested: {
@@ -54,13 +56,14 @@ function DragList() {
     },
   };
   window.onload = function() {
-    
+    // retrieve all friends from previous login sessions
     axios.post('http://localhost:8081/retrieve')
     .then(res => {
       if (res.data === "Not Logged In") {
         alert('please log in')
       }
       else {
+        // add friends to array with loop
         for (let i = 0; i < res.data.length; i++) {
           tasks.push({id: res.data[i].id.toString(), content: res.data[i].name, image: res.data[i].image})
         }
@@ -86,6 +89,7 @@ function DragList() {
   const [newTask, setNewTask] = useState({ content: "", image: null });
   const [codes, setCodes] = useState([]);
 
+  // handles user input with name and image
   const handleChange = (e) => {
     const { name, files } = e.target;
     if (name === "content") {
@@ -99,7 +103,7 @@ function DragList() {
     }
 };
 
-
+  // after submitting, set task to submission
   const handleSubmit = (e) => {
     e.preventDefault();
     let task = {
@@ -108,8 +112,8 @@ function DragList() {
         image: newTask.image // This is now a Base64 encoded string
     };
 
-    
-    axiosInstance.post('http://localhost:8081/insert', task)
+    // insert submission into database
+    axios.post('http://localhost:8081/insert', task)
     .then(res => {
         // if invalid insert, prompt the user to retype
         if (res.data === "Error") {
@@ -119,6 +123,7 @@ function DragList() {
           alert('please log in')
         }
         else {
+            // set the id of submission
             task.id = res.data.toString();
             setColumns({
               ...columns,
@@ -135,6 +140,7 @@ function DragList() {
       .catch(err => console.log(err));
   };
 
+  // handles user deleting a friend
   const handleDelete = (columnId, itemId) => {
     axios.post('http://localhost:8081/delete', {id: itemId})
     .then(res => {
@@ -146,6 +152,7 @@ function DragList() {
           alert('please log in')
         }
         else {
+          // remove friend from array
           const column = columns[columnId];
           const filteredItems = column.items.filter((item) => item.id !== itemId);
           setColumns({
@@ -161,6 +168,7 @@ function DragList() {
       .catch(err => console.log(err));
   };
 
+  // generates a random join code with capital and undercase letters and numbers
   const generateRandomCode = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -171,11 +179,14 @@ function DragList() {
     return result;
   };
 
+  // handles when user clicks play
   const handlePlayClick = (event) => {
     event.preventDefault();
+    // generates code and ids
     const newCode = generateRandomCode();
     const ids = getIncludeColumnIds();
     setCodes([...codes, newCode]);
+    // checks that user is ready to play
     axios.post('http://localhost:8081/play', {code: newCode, friends: ids})
     .then(res => {
         // if invalid play, prompt the user to retype
@@ -196,6 +207,7 @@ function DragList() {
                 alert('please log in')
               }
               else {
+                // sets up the board
                  let cards = res.data[0]
                  let code = res.data[1]
                  let character = res.data[2]
@@ -215,15 +227,13 @@ function DragList() {
   };
 
   const getIncludeColumnIds = () => {
-    // Assuming 'toDo' is the key for the 'Include' column
     const includeColumn = columns['toDo'];
   
-    // Check if the column exists and has items
+    // check if the column exists and has items
     if (includeColumn && includeColumn.items) {
-      // Map over the items and extract their IDs
+      // map over the items for ids
       return includeColumn.items.map(item => item.id);
     } else {
-      // Return an empty array if the column is not found or has no items
       return [];
     }
   };
