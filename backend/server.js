@@ -94,16 +94,34 @@ app.post('/insert', (req, res) => {
     if (session_id === 0) {
         return res.json("Not Logged In");
     }
-    const sql = "INSERT INTO `guess-who-database`.names (user_id, name, image) VALUES (?, ?, ?);";
-    db.query(sql, [session_id, req.body.content, req.body.image], (err1, data) => {
-        // catches error when inserting
-        if (err1) {
 
+    const content = req.body.content;
+    let image = req.body.image;
+
+    // Check if image is provided and is in Base64 format
+    if (image && image.includes("base64,")) {
+        // Extracting the Base64 encoded string
+        image = image.split("base64,")[1];
+
+        // Decoding the Base64 string to binary data
+        const buffer = Buffer.from(image, 'base64');
+
+        // Now buffer contains the binary data of the image
+        image = buffer;
+    } else {
+        image = null; // If no image or not in expected format, set it to null
+    }
+
+    const sql = "INSERT INTO `guess-who-database`.names (user_id, name, image) VALUES (?, ?, ?);";
+    db.query(sql, [session_id, content, image], (err1, data) => {
+        if (err1) {
+            console.error(err1);
             return res.json("Error");
         }
         return res.json(data.insertId);
     });
 });
+
 
 // deletes name for user
 app.post('/delete', (req, res) => {
@@ -127,14 +145,21 @@ app.post('/retrieve', (req, res) => {
         return res.json("Not Logged In");
     }
     const sql = "SELECT * FROM `guess-who-database`.names WHERE user_id = ?;";
-    db.query(sql, [session_id], (err1, data) => {
-        // catches error when deleting
+    db.query(sql, [session_id], (err1, results) => {
         if (err1) {
             return res.json("Not Logged In");
         }
-        return res.json(data);
+        const dataWithBase64Images = results.map(item => {
+            let imageBase64 = '';
+            if (item.image && Buffer.isBuffer(item.image)) {
+                imageBase64 = `data:image/jpeg;base64,${item.image.toString('base64')}`;
+            }
+            return {...item, image: imageBase64};
+        });
+        return res.json(dataWithBase64Images);
     });
 });
+
 
 app.post('/play', (req, res) => {
     if (session_id === 0) {
@@ -171,7 +196,11 @@ app.post('/host_join', async (req, res) => {
         for (let id of id_array) {
             const sql2 = "SELECT * FROM `guess-who-database`.names WHERE id = ?;";
             const namesResult = await dbPromiseQuery(sql2, [id]);
-            card_array.push({ name: namesResult[0].name, image: namesResult[0].image });
+            let imageBase64 = '';
+            if (namesResult[0].image && Buffer.isBuffer(namesResult[0].image)) {
+                imageBase64 = `data:image/jpeg;base64,${namesResult[0].image.toString('base64')}`;
+            }
+            card_array.push({ name: namesResult[0].name, image: imageBase64 });
         }
         res.json([card_array, req.body.code1, card_array[random].name]);
     } catch (err) {
@@ -179,6 +208,7 @@ app.post('/host_join', async (req, res) => {
         res.json("Error");
     }
 });
+
 
 function dbPromiseQuery(sql, params) {
     return new Promise((resolve, reject) => {

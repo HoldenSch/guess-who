@@ -4,7 +4,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
 
 
-
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
@@ -55,6 +54,7 @@ function DragList() {
     },
   };
   window.onload = function() {
+    
     axios.post('http://localhost:8081/retrieve')
     .then(res => {
       if (res.data === "Not Logged In") {
@@ -87,21 +87,28 @@ function DragList() {
   const [codes, setCodes] = useState([]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, files } = e.target;
     if (name === "content") {
-      setNewTask({ ...newTask, content: value });
-    } else if (name === "image") {
-      setNewTask({ ...newTask, image: e.target.files[0] });
+        setNewTask({ ...newTask, content: e.target.value });
+    } else if (name === "image" && files.length > 0) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]); // Reads the file as Data URL (Base64 encoded)
+        fileReader.onload = (event) => {
+            setNewTask({ ...newTask, image: event.target.result }); // The result is a Base64 encoded string (Blob data)
+        };
     }
-  };
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let task = {
-      id: "",
-      content: newTask.content,
-      image: newTask.image ? URL.createObjectURL(newTask.image) : null,
+        id: "",
+        content: newTask.content,
+        image: newTask.image // This is now a Base64 encoded string
     };
+
+    
     axios.post('http://localhost:8081/insert', task)
     .then(res => {
         // if invalid insert, prompt the user to retype
