@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 let session_id = 0;
-let game_code = "";
 
 // creates connection with MySQL
 const db = mysql.createConnection({
