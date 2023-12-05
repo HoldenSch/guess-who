@@ -93,13 +93,14 @@ function DragList() {
   const handleChange = (e) => {
     const { name, files } = e.target;
     if (name === "content") {
-        setNewTask({ ...newTask, content: e.target.value });
-    } else if (name === "image" && files.length > 0) {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(files[0]); // Reads the file as Data URL (Base64 encoded)
-        fileReader.onload = (event) => {
-            setNewTask({ ...newTask, image: event.target.result }); // The result is a Base64 encoded string (Blob data)
-        };
+      setNewTask({ ...newTask, content: e.target.value });
+    } 
+    else if (name === "image" && files.length > 0) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(files[0]); // Reads the file as Data URL (Base64 encoded)
+      fileReader.onload = (event) => {
+        setNewTask({ ...newTask, image: event.target.result }); // The result is a Base64 encoded string (Blob data)
+      };
     }
 };
 
@@ -107,65 +108,64 @@ function DragList() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let task = {
-        id: "",
-        content: newTask.content,
-        image: newTask.image // This is now a Base64 encoded string
+      id: "",
+      content: newTask.content,
+      image: newTask.image // This is now a Base64 encoded string
     };
 
     // insert submission into database
     axios.post('http://localhost:8081/insert', task)
     .then(res => {
-        // if invalid insert, prompt the user to retype
-        if (res.data === "Error") {
-            alert('failed to add friend, please retry');
-        }
-        else if (res.data === "Not Logged In") {
-          alert('please log in')
-        }
-        else {
-            // set the id of submission
-            task.id = res.data.toString();
-            setColumns({
-              ...columns,
-              requested: {
-                ...columns.requested,
-                items: [...columns.requested.items, task],
-              },
-            });
-        
-            setNewTask({ content: "", image: null });
-        }
-      })
+      // if invalid insert, prompt the user to retype
+      if (res.data === "Error") {
+         alert('failed to add friend, please retry');
+      }
+      else if (res.data === "Not Logged In") {
+        alert('please log in')
+      }
+      else {
+        // set the id of submission
+        task.id = res.data.toString();
+        setColumns({
+          ...columns,
+          requested: {
+            ...columns.requested,
+            items: [...columns.requested.items, task],
+          },
+        });
+        setNewTask({ content: "", image: null });
+      }
+    })
       // catches any error
-      .catch(err => console.log(err));
+    .catch(err => console.log(err));
   };
 
   // handles user deleting a friend
   const handleDelete = (columnId, itemId) => {
     axios.post('http://localhost:8081/delete', {id: itemId})
     .then(res => {
-        // if invalid delete, prompt the user to retype
-        if (res.data === "Error") {
-            alert('failed to delete friend, please retry');
-        }
-        else if (res.data === "Not Logged In") {
-          alert('please log in')
-        }
-        else {
-          // remove friend from array
-          const column = columns[columnId];
-          const filteredItems = column.items.filter((item) => item.id !== itemId);
-          setColumns({
-            ...columns,
-            [columnId]: {
-              ...column,
-              items: filteredItems,
-            },
-          });
-        }
-      })
-      // catches any error
-      .catch(err => console.log(err));
+      // if invalid delete, prompt the user to retype
+      if (res.data === "Error") {
+        alert('failed to delete friend, please retry');
+      }
+      else if (res.data === "Not Logged In") {
+        alert('please log in')
+      }
+      else {
+        // remove friend from array
+        const column = columns[columnId];
+        const filteredItems = column.items.filter((item) => item.id !== itemId);
+        setColumns({
+          ...columns,
+          [columnId]: {
+            ...column,
+            items: filteredItems,
+          },
+        });
+      }
+    })
+    // catches any error
+    .catch(err => console.log(err));
   };
 
   // generates a random join code with capital and undercase letters and numbers
@@ -189,37 +189,36 @@ function DragList() {
     // checks that user is ready to play
     axios.post('http://localhost:8081/play', {code: newCode, friends: ids})
     .then(res => {
-        // if invalid play, prompt the user to retype
-        if (res.data === "Error") {
-            alert('failed to create game, please retry');
-        }
-        else if (res.data === "Not Logged In") {
-          alert('please log in')
-        }
-        else {
-          axios.post('http://localhost:8081/host_join', {code1: newCode})
-          .then(res => {
-              // if invalid delete, prompt the user to retype
-              if (res.data === "Error") {
-                  alert('failed to create game, please retry');
-              }
-              else if (res.data === "Not Logged In") {
-                alert('please log in')
-              }
-              else {
-                // sets up the board
-                 let cards = res.data[0]
-                 let code = res.data[1]
-                 let character = res.data[2]
-                 localStorage.setItem('cards', JSON.stringify(cards));
-                 localStorage.setItem('code', JSON.stringify(code));
-                 localStorage.setItem('character', JSON.stringify(character));
-                  window.location.href = '/Board';
-              }
-            })
-            // catches any error
-            .catch(err => console.log(err));
-          
+      // if invalid play, prompt the user to retype
+      if (res.data === "Error") {
+          alert('failed to create game, please retry');
+      }
+      else if (res.data === "Not Logged In") {
+        alert('please log in')
+      }
+      else {
+        axios.post('http://localhost:8081/host_join', {code1: newCode})
+        .then(res => {
+            // if invalid delete, prompt the user to retype
+            if (res.data === "Error") {
+              alert('failed to create game, please retry');
+            }
+            else if (res.data === "Not Logged In") {
+              alert('please log in')
+            }
+            else {
+              // sets up the board
+              let cards = res.data[0]
+              let code = res.data[1]
+              let character = res.data[2]
+              localStorage.setItem('cards', JSON.stringify(cards));
+              localStorage.setItem('code', JSON.stringify(code));
+              localStorage.setItem('character', JSON.stringify(character));
+              window.location.href = '/Board';
+            }
+          })
+          // catches any error
+          .catch(err => console.log(err));
         }
       })
       // catches any error
@@ -343,13 +342,6 @@ function DragList() {
       >
         Play!
       </button>
-
-      {/* Optional: Display generated codes */}
-      <div>
-        {codes.map((code, index) => (
-          <div key={index}>{code}</div>
-        ))}
-      </div>
           </div>
         </div>
         <DragDropContext
