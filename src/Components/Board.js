@@ -12,7 +12,7 @@ let character = JSON.parse(localStorage.getItem('character'));
 
 function Board () {
   const [showPopup, setShowPopup] = useState(true); // state for popup visibility
-  const [userInput, setUserInput] = useState(''); 
+  const [userInput] = useState(''); 
   const [dropdownItems, setDropdownItems] = useState([
     "Home"
   ]);
