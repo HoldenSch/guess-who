@@ -43,29 +43,47 @@ function Login () {
 
     return (
         <div className='d-flex justify-content-center algin-items-center vh-100'>
-            <h1 class="registerName">Login</h1>
-            {/* login form */}
-            <form action="" onSubmit={handleSubmit}>
-                {/* username input */}
-                <div class="mb-3">
-                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" 
-                    onChange={handleInput} placeholder="Username" type="text"/>
-                    {errors.username && <span class='text-danger'> {errors.username}</span>}
-                </div>
-                {/* password input */}
-                <div class="mb-3">
-                    <input class="form-control mx-auto w-auto" id="password" name="password" 
-                    onChange={handleInput} placeholder="Password" type="password"/>
-                    {errors.password && <span class='text-danger'> {errors.password}</span>}
-                </div>
-                {/* submit button */}
-                <button class="btn btn-success" type="submit">Log In</button>
-                {/* register button, directs to register page */}
-                <Link to="/register" class="btn btn-default border">Create Account</Link>
-            </form>
-
+          {/* Page title */}
+          <h1 class="registerName">Login</h1>
+          {/* Login form */}
+          <form action="" onSubmit={handleSubmit}>
+            {/* Username input */}
+            <div class="mb-3">
+              {/* Input field for entering the username */}
+              <input
+                autocomplete="off"
+                autofocus
+                class="form-control mx-auto w-auto"
+                id="username"
+                name="username"
+                onChange={handleInput}
+                placeholder="Username"
+                type="text"
+              />
+              {/* Display error message if there are errors related to the username */}
+              {errors.username && <span class='text-danger'> {errors.username}</span>}
+            </div>
+            {/* Password input */}
+            <div class="mb-3">
+              {/* Input field for entering the password */}
+              <input
+                class="form-control mx-auto w-auto"
+                id="password"
+                name="password"
+                onChange={handleInput}
+                placeholder="Password"
+                type="password"
+              />
+              {/* Display error message if there are errors related to the password */}
+              {errors.password && <span class='text-danger'> {errors.password}</span>}
+            </div>
+            {/* Submit button for logging in */}
+            <button class="btn btn-success" type="submit">Log In</button>
+            {/* Register button, which directs to the register page */}
+            <Link to="/register" class="btn btn-default border">Create Account</Link>
+          </form>
         </div>
-    );
+      );      
 }
 
 export default Login;

@@ -54,26 +54,34 @@ function Play () {
   };
   return (
     <div>
+      {/* Start of the page body */}
       <body>
+        {/* Game name and header */}
         <div class="gameName">
           <div class="headerContainer">
+            {/* Game title */}
             <p>Guess Who!</p>
+            {/* Dropdown menu for settings */}
             <div class="dropdown1">
               <Dropdown>
                 <Dropdown.Toggle variant="warning" id="dropdown-basic" class="playdropdown">
                   Settings
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  {/* Link to the home page */}
                   <Dropdown.Item href="/home">Home</Dropdown.Item>
+                  {/* Logout option */}
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
           </div>
         </div>
+        {/* Start menu */}
         <div class="startMenu">
           <form class="enterCode" onSubmit={handleSubmit}>
             <div class="fullGame">
+              {/* Input field for entering the game code */}
               <input
                 type="text"
                 id="gameCode"
@@ -81,9 +89,11 @@ function Play () {
                 placeholder="Enter Game Code"
                 onChange={handleInput}
               ></input>
+              {/* Button for joining the game */}
               <input class="joinButton" type="submit" value="Join"></input>
             </div>
           </form>
+          {/* Button for creating a private room */}
           <div class="createRoom d-grid gap-2 col-11 mx-auto">
             <button
               class="btn btn-primary"
@@ -96,7 +106,7 @@ function Play () {
         </div>
       </body>
     </div>
-  );
+  );  
 }
 
 export default Play;

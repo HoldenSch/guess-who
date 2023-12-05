@@ -238,10 +238,9 @@ function DragList() {
   };
   
 
-
-
   return (
     <div style={{ marginTop: "10vh" }}>
+    {/* Title of the board */}
       <h1 style={{ fontFamily: "Gilroy-Bold, sans-serif", fontSize: "5.8vw", marginBottom: "60px", textAlign:"center" }}>
         Create Your Board
       </h1>
@@ -256,6 +255,7 @@ function DragList() {
             marginRight: "8px",
           }}
         >
+          {/* Add Button */}
           <h2
             style={{
               fontFamily: "Gilroy-Bold, sans-serif",
@@ -274,6 +274,7 @@ function DragList() {
               borderRadius: "20px",
             }}
           >
+            {/* Form for adding new items */}
             <form
               onSubmit={handleSubmit}
               style={{
@@ -282,6 +283,7 @@ function DragList() {
                 alignItems: "center",
               }}
             >
+              {/* Input for item content */}
               <input
                 type="text"
                 name="content"
@@ -299,6 +301,7 @@ function DragList() {
                   marginTop: "13px",
                 }}
               />
+              {/* Input for item image */}
               <input
                 type="file"
                 name="image"
@@ -306,6 +309,7 @@ function DragList() {
                 accept="image/*"
                 style={{ marginBottom: "10px", width: "92%", border: "none", color: "grey"}}
               />
+              {/* Button to add the item */}
               <button
                 type="submit"
                 style={{
@@ -324,6 +328,7 @@ function DragList() {
             </form>
           </div>
           <div>
+          {/* Play button */}
           <button
         onClick={handlePlayClick}
         type="submit"
@@ -347,6 +352,7 @@ function DragList() {
         <DragDropContext
           onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
         >
+          {/* Mapping over columns */}
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
               <div
@@ -357,6 +363,7 @@ function DragList() {
                 }}
                 key={columnId}
               >
+                {/* Column name */}
                 <h2
                   style={{
                     fontFamily: "Gilroy-Bold, sans-serif",
@@ -385,6 +392,7 @@ function DragList() {
                             color: "#363838"
                           }}
                         >
+                          {/* Mapping over items within the column */}
                           {column.items.map((item, index) => {
                             return (
                               <Draggable
@@ -415,6 +423,7 @@ function DragList() {
                                       }}
                                     >
                                       <div>
+                                        {/* Display item image (if available) and content */}
                                         {item.image && (
                                           <img
                                             src={item.image}
@@ -424,6 +433,7 @@ function DragList() {
                                         )}
                                         {item.content}
                                       </div>
+                                      {/* Button to delete the item */}
                                       <button
                                         onClick={() =>
                                           handleDelete(columnId, item.id)
@@ -460,5 +470,6 @@ function DragList() {
     </div>
   );
 }
+
 
 export default DragList;
