@@ -28,7 +28,7 @@ function Login () {
             axios.post('http://localhost:8081/login', values)
             .then(res => {
                 // if invalid login, prompt the user to retype
-                if (res.data === "Fail") {
+                if (res.data === "Error") {
                     alert('invalid username and/or password');
                 }
                 else {

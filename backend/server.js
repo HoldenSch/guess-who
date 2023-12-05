@@ -82,7 +82,7 @@ app.post('/login', (req, res) => {
             } 
             // otherwise passwords do not match
             else {
-                return res.json("Fail");
+                return res.json("Error");
             }
         });
     })
