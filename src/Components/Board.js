@@ -21,6 +21,12 @@ function Board() {
     setDropdownItems([...dropdownItems, userInput]); // hide the popup after submitting
   };
 
+  // handles user clicking the info popup
+  const handlePopupAsk = () => {
+    console.log(userInput);
+    setShowPopup(true);
+  };
+
   // handles user clicking log out
   const handleLogout = () => {
     axios
@@ -89,12 +95,10 @@ function Board() {
           </Dropdown.Toggle>
   
           <Dropdown.Menu>
+            {/* Shows information popup again */}
+            <Dropdown.Item onClick={handlePopupAsk}>Game Info</Dropdown.Item>
             {/* Link to the home page */}
             <Dropdown.Item href="/home">Home</Dropdown.Item>
-            {/* Display the game code */}
-            <Dropdown.Item>Game Code: {code}</Dropdown.Item>
-            {/* Display the player's character */}
-            <Dropdown.Item>Answer: {character}</Dropdown.Item>
             {/* Logout option */}
             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
           </Dropdown.Menu>
