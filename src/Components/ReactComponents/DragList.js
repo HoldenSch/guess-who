@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 
 
 const onDragEnd = (result, columns, setColumns) => {
@@ -87,22 +88,36 @@ function DragList() {
 
   const [columns, setColumns] = useState(taskStatus);
   const [newTask, setNewTask] = useState({ content: "", image: null });
+  console.log('New Task State:', newTask);
   const [codes, setCodes] = useState([]);
 
   // handles user input with name and image
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, files } = e.target;
+  
     if (name === "content") {
       setNewTask({ ...newTask, content: e.target.value });
-    } 
-    else if (name === "image" && files.length > 0) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(files[0]); // Reads the file as Data URL (Base64 encoded)
-      fileReader.onload = (event) => {
-        setNewTask({ ...newTask, image: event.target.result }); // The result is a Base64 encoded string (Blob data)
-      };
+    } else if (name === "image" && files.length > 0) {
+      try {
+        const options = {
+          maxSizeMB: 0.03,
+          maxWidthOrHeight: 512,
+        };
+  
+        const compressedFile = await imageCompression(files[0], options);
+        console.log('Compressed file size:', compressedFile.size);
+  
+        const reader = new FileReader();
+        reader.onload = () => {
+          setNewTask({ ...newTask, image: reader.result });
+        };
+        reader.readAsDataURL(compressedFile); // Reads the compressed file as Data URL
+      } catch (error) {
+        console.error('Image compression error:', error);
+      }
     }
-};
+  };
+  
 
   // after submitting, set task to submission
   const handleSubmit = (e) => {
