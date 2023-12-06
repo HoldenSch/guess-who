@@ -4,15 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Section 1: Downloading and compiling source code
 1) Download source code from GitHub (https://github.com/HoldenSch/guess-who/tree/main) onto Visual Studio Code (or some other source-code editor) using Git. If you don't have git, please follow directions to install it here: https://git-scm.com/downloads
-2) In terminal window, cd into the guess-who directory (`cd guess-who`)
-3) Check if you have Node.js/npm downloaded by checking the version (`npm -v`). If there’s a version output, then npm is downloaded. Otherwise, download npm by following instructions at https://nodejs.org/en/download/ 
-4) With npm downloaded, install npm (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
+2) In terminal window, if not already in the guess-who directory, cd into the guess-who directory (`cd guess-who`)
+3) Check if you have Node.js/npm downloaded by checking the version (`node -v` and `npm -v`). If there’s a version output, then Node.js/npm is downloaded. If an error occurs, that means you haven't installed it, so download Node.js/npm by following instructions at https://nodejs.org/en/download/. You may need to restart VSCode for it to fully install.
+4) With Node.js/npm downloaded, install npm (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
 5) From the guess-who directory, cd into the backend folder (`cd backend`)
 6) Install npm again (`npm install`), which will install all packages for the backend directory.
-7) Go back to the guess-who folder and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view.
-8) cd into the backend folder and run npm (`npm start`). This will let the server listen through port 8081. To make sure it’s listening, check the terminal, which should say 
-“[nodemon] restarting due to changes...
-[nodemon] starting `node server.js`
+7) Cd back to the guess-who folder (`cd ..`) and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view.
+8) Click the "+" to add a new terminal window. Then cd into the backend folder (`cd backend`) and run npm (`npm start`). This will let the server listen through port 8081. To make sure it’s listening, check the terminal, which should say in green:
+“[nodemon] starting `node server.js`
 listening”
 9) Go to http://localhost:3000/ and start playing! (See Section 3 for instructions on how to play the game)
 
@@ -52,6 +51,10 @@ Then, once logged in, you can create a game by clicking the “Create Private Ro
 
 Once in the game board, share the game code that pops up with your friends! If your friend has installed this game on another computer, they can log in and join the same game by inputting the code into the “Enter game code” on the homepage. Once your friend and you are in the game, you can play the game by asking your opponent “yes-or-no” questions about their secret character, and then narrow down your list by clicking on the cards to flip them over. Have fun!
 
+If you want some demo boards, here are the username/password of some examples
+Username: Sunny | Password: Liu -> Demo board with Pokemon
+Username: Animal | Password: Animal -> Demo board with Animals
+
 ## Section 4: Video Demo
-https://youtu.be/KMx_znlUkG8
-This is our video link. 
+https://youtu.be/0chs3xQedhI
+This is our video link. At times 0:50 and 1:00, Holden clicked on the “Choose File” button and then chose “Eevee” and “Charizard” images from his computer’s files. However, it did not show up on the screen recording because Screencastify did not have permissions to show the Files app. However, when you play the game on your computer, you will see your files popup. Hopefully that clarifies any potential confusion.
