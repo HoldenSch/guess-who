@@ -96,6 +96,9 @@ app.post('/insert', (req, res) => {
     }
 
     const content = req.body.content;
+    if (content.toString().length === 0) {
+        return res.json("Error")
+    }
     let image = req.body.image;
 
     // Check if image is provided and is in Base64 format
