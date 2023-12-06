@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1) Download source code from GitHub (https://github.com/HoldenSch/guess-who/tree/main) onto Visual Studio Code (or some other source-code editor) using Git. If you don't have git, please follow directions to install it here: https://git-scm.com/downloads
 2) In terminal window, if not already in the guess-who directory, cd into the guess-who directory (`cd guess-who`)
 3) Check if you have Node.js/npm downloaded by checking the version (`node -v` and `npm -v`). If there’s a version output, then Node.js/npm is downloaded properly. If an error occurs, that means you haven't installed it, so download Node.js/npm by following instructions at https://nodejs.org/en/download/. You may need to restart VSCode for it to fully install.
-4) With Node.js/npm downloaded, install npm (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
+4) With Node.js/npm downloaded, run npm install (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
 5) From the guess-who directory, cd into the backend folder (`cd backend`)
-6) Install npm again (`npm install`), which will install all packages for the backend directory.
+6) Run npm install again (`npm install`), which will install all packages for the backend directory.
 7) Cd back to the guess-who folder (`cd ..`) and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view.
 8) Click the "+" to add a new terminal window. Then cd into the backend folder (`cd backend`) and run npm (`npm start`). This will let the server listen through port 8081. To make sure it’s listening, check the terminal, which should say in green:
 “[nodemon] starting `node server.js`
