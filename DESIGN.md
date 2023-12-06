@@ -35,5 +35,5 @@ Then, assuming that your opponent (Player 2) is on another computer, you (Player
 If the players forget the join code or their secret character, we decided to add a “Game Info” button in the “Settings” dropdown, so they see the same popup information again. 
 When the players are done playing the game, they can click “Settings” and either click “Home” (directs to home page) or “Logout” (clears their session ID and directs to login page)
 
-
+## 7) Various CSS files
 We will not elaborate in much detail about our CSS files, as they just contain properties that enhance the looks and aesthetics of our web app. We did use Boostrap for much of our CSS.
