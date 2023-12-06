@@ -58,7 +58,7 @@ function DragList() {
   };
   window.onload = function() {
     // retrieve all friends from previous login sessions
-    axios.post('http://localhost:8081/retrieve')
+    axios.post('https://main.ddg1ugtbq3k9j.amplifyapp.com:8081/retrieve')
     .then(res => {
       if (res.data === "Not Logged In") {
         alert('please log in')
@@ -131,7 +131,7 @@ function DragList() {
     };
 
     // insert submission into database
-    axios.post('http://localhost:8081/insert', task)
+    axios.post('https://main.ddg1ugtbq3k9j.amplifyapp.com:8081/insert', task)
     .then(res => {
       // if invalid insert, prompt the user to retype
       if (res.data === "Error") {
@@ -159,7 +159,7 @@ function DragList() {
 
   // handles user deleting a friend
   const handleDelete = (columnId, itemId) => {
-    axios.post('http://localhost:8081/delete', {id: itemId})
+    axios.post('https://main.ddg1ugtbq3k9j.amplifyapp.com:8081/delete', {id: itemId})
     .then(res => {
       // if invalid delete, prompt the user to retype
       if (res.data === "Error") {
@@ -204,7 +204,7 @@ function DragList() {
     const ids = getIncludeColumnIds();
     setCodes([...codes, newCode]);
     // checks that user is ready to play
-    axios.post('http://localhost:8081/play', {code: newCode, friends: ids})
+    axios.post('https://main.ddg1ugtbq3k9j.amplifyapp.com:8081/play', {code: newCode, friends: ids})
     .then(res => {
       // if invalid play, prompt the user to retype
       if (res.data === "Error") {
@@ -214,7 +214,7 @@ function DragList() {
         alert('please log in')
       }
       else {
-        axios.post('http://localhost:8081/host_join', {code1: newCode})
+        axios.post('https://main.ddg1ugtbq3k9j.amplifyapp.com:8081/host_join', {code1: newCode})
         .then(res => {
             // if invalid delete, prompt the user to retype
             if (res.data === "Error") {
