@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Section 1: Downloading and compiling source code
 1) Download source code from GitHub (https://github.com/HoldenSch/guess-who/tree/main) onto Visual Studio Code (or some other source-code editor) using Git. If you don't have git, please follow directions to install it here: https://git-scm.com/downloads
 2) In terminal window, if not already in the guess-who directory, cd into the guess-who directory (`cd guess-who`)
-3) Check if you have Node.js/npm downloaded by checking the version (`node -v` and `npm -v`). If there’s a version output, then Node.js/npm is downloaded. If an error occurs, that means you haven't installed it, so download Node.js/npm by following instructions at https://nodejs.org/en/download/. You may need to restart VSCode for it to fully install.
+3) Check if you have Node.js/npm downloaded by checking the version (`node -v` and `npm -v`). If there’s a version output, then Node.js/npm is downloaded properly. If an error occurs, that means you haven't installed it, so download Node.js/npm by following instructions at https://nodejs.org/en/download/. You may need to restart VSCode for it to fully install.
 4) With Node.js/npm downloaded, install npm (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
 5) From the guess-who directory, cd into the backend folder (`cd backend`)
 6) Install npm again (`npm install`), which will install all packages for the backend directory.
