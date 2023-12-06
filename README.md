@@ -1,71 +1,57 @@
-# Getting Started with Create React App
+# Guess Who Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Section 1: Downloading and compiling source code
+1) Download source code from GitHub (https://github.com/HoldenSch/guess-who/tree/main) onto Visual Studio Code (or some other source-code editor)
+2) In terminal window, cd into the guess-who directory (`cd guess-who`)
+3) Check if you have Node.js/npm downloaded by checking the version (`npm -v`). If there’s a version output, then npm is downloaded. Otherwise, download npm by following instructions at https://nodejs.org/en/download/ 
+4) With npm downloaded, install npm (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
+5) From the guess-who directory, cd into the backend folder (`cd backend`)
+6) Install npm again (`npm install`), which will install all packages for the backend directory.
+7) Go back to the guess-who folder and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view.
+8) cd into the backend folder and run npm (`npm start`). This will let the server listen through port 8081. To make sure it’s listening, check the terminal, which should say 
+“[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+listening”
+9) Go to http://localhost:3000/ and start playing! (See Section 3 for instructions on how to play the game)
 
-In the project directory, you can run:
+## Section 2: MySQL Database
 
-### `npm start`
+We have a MySQL database on MySQL Workbench that handles SQL requests. This program is not needed to compile and/or test the program, since we have synced it with Google Cloud SQL, so we have omitted its installation steps from documentation. However, here is the schema listed below with 3 tables, if anyone wants to see:
+1) Users → CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` text NOT NULL,
+  `password_hash` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2) Names → CREATE TABLE `names` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `name` text NOT NULL,
+  `image` longblob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb3
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3) Game_codes → CREATE TABLE `game_codes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `code_name` varchar(6) NOT NULL,
+  `names` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3
 
-### `npm test`
+## Section 3: How to play the game
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is a web game intended for laptops and computers (not intended for mobile devices). 
 
-### `npm run build`
+First, you can register for an account by clicking on the “Create Account” button (please don’t use an actual password). Then, you will be redirected to the login page where you use the same username and password to log in. Note, at the first time you click the register/login button, if nothing loads, please click the button again. Sometimes the server is slow and SQL doesn’t process when you click the button.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then, once logged in, you can create a game by clicking the “Create Private Room” button. Enter the names of your friends in the box and upload photos from your computer (if you want). Note, please be patient when uploading photos because if photo sizes are large (a couple MB or larger), then the server will take around 0.5-1 seconds to compress the image; as a result, we disabled the “Add Character” button until the image is compressed. Furthermore, please don’t add any images larger than 10 MB (see more in Design.md). Once you are done adding names/images, drag all names that you want to use for your game over to the “Include” section. Once down, click “Play”. Note, if you added a lot of photos with large image sizes, the game board might take a few seconds to load. If it takes too long, please reload the page and remove some images.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Once in the game board, share the game code that pops up with your friends! If your friend has installed this game on another computer, they can log in and join the same game by inputting the code into the “Enter game code” on the homepage. Once your friend and you are in the game, you can play the game by asking your opponent “yes-or-no” questions about their secret character, and then narrow down your list by clicking on the cards to flip them over. Have fun!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# guess-who
+## Section 4: Video Demo
+https://youtu.be/0chs3xQedhI
+Above is our video link. At times 0:50 and 1:00, Holden clicked on the “Choose File” button and then chose “Eevee” and “Charizard” images from his computer’s files. However, it did not show up on the screen recording because Screencastify did not have permissions to show the Files app. However, when you play the game on your computer, you will see your files popup. Hopefully that clarifies any potential confusion.
