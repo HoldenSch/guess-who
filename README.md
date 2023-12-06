@@ -54,4 +54,4 @@ Once in the game board, share the game code that pops up with your friends! If y
 
 ## Section 4: Video Demo
 https://youtu.be/0chs3xQedhI
-Above is our video link. At times 0:50 and 1:00, Holden clicked on the “Choose File” button and then chose “Eevee” and “Charizard” images from his computer’s files. However, it did not show up on the screen recording because Screencastify did not have permissions to show the Files app. However, when you play the game on your computer, you will see your files popup. Hopefully that clarifies any potential confusion.
+This is our video link. At times 0:50 and 1:00, Holden clicked on the “Choose File” button and then chose “Eevee” and “Charizard” images from his computer’s files. However, it did not show up on the screen recording because Screencastify did not have permissions to show the Files app. However, when you play the game on your computer, you will see your files popup. Hopefully that clarifies any potential confusion.
