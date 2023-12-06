@@ -74,7 +74,7 @@ function Board() {
           {/* Disclaimer message */}
           <p class="disclaimer">
             Don't worry if you forget the join code/character, click the
-            settings button to view them at any time!
+            settings button and then click "Game Info" to view this at any time!
           </p>
           {/* Confirm button for the popup */}
           <button onClick={handlePopupSubmit}>Confirm</button>
