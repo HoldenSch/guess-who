@@ -88,8 +88,8 @@ function DragList() {
 
   const [columns, setColumns] = useState(taskStatus);
   const [newTask, setNewTask] = useState({ content: "", image: null });
-  console.log('New Task State:', newTask);
   const [codes, setCodes] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
 
   // handles user input with name and image
   const handleChange = async (e) => {
@@ -99,21 +99,23 @@ function DragList() {
       setNewTask({ ...newTask, content: e.target.value });
     } else if (name === "image" && files.length > 0) {
       try {
+        setSubmitting(true);
         const options = {
           maxSizeMB: 0.03,
           maxWidthOrHeight: 512,
         };
   
         const compressedFile = await imageCompression(files[0], options);
-        console.log('Compressed file size:', compressedFile.size);
   
         const reader = new FileReader();
         reader.onload = () => {
           setNewTask({ ...newTask, image: reader.result });
+          setSubmitting(false);
         };
         reader.readAsDataURL(compressedFile); // Reads the compressed file as Data URL
       } catch (error) {
-        console.error('Image compression error:', error);
+        alert('error uploading and compressing image');
+        setSubmitting(false);
       }
     }
   };
@@ -327,6 +329,7 @@ function DragList() {
               {/* Button to add the item */}
               <button
                 type="submit"
+                disabled={submitting}
                 style={{
                   width: "92%",
                   background: "rgb(190,224,211)",
