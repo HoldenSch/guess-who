@@ -42,7 +42,7 @@ For our “dragging” functionality from “Exclude” to “Include” column,
 Finally, once the user is done dragging all the friends they want to use onto the “Include” column, they can click “Play”. Once clicked, the program will generate a random 6-character code using lowercase letters, uppercase letters, and numbers. We decided to go with a randomly generated code because it mimics real-life games and the chances of generating the same 6-character code is very close to 0%. Additionally, the program will also use a random number generator to select your secret character that your opponent is trying to guess. Once these are all generated, the program will direct you to the game board.
 
 ## 6) Board.js and FlipCard.js
-In Board.js, this program will set up the entire game board for the user. First, there will be a popup that will tell the user the game code and their secret character. Then, the user can share the game code to their friends, who can join the same game on another computer! After clicking “Confim”, the popup would disappear and then the entire board will show. 
+In Board.js, this program will set up the entire game board for the user. First, there will be a popup that will tell the user the game code and their secret character. Then, the user can share the game code to their friends, who can join the same game on another computer! After clicking "Confirm", the popup would disappear and then the entire board will show. 
 
 Then, assuming that your opponent (Player 2) is on another computer, you (Player 1) will start asking Player 2 yes-or-no questions about their secret character. Then, you can narrow down your options by clicking on the cards to flip them, which will cause a big red “X” mark to appear. If you accidentally clicked on a card, don’t worry because you can click on the card again to turn it back over. Whoever guesses the opponent’s secret character first wins! 
 
@@ -51,4 +51,4 @@ If the players forget the join code or their secret character, we decided to add
 When the players are done playing the game, they can click “Settings” and either click “Home” (directs to home page) or “Logout” (clears their session ID and directs to login page)
 
 ## 7) Various CSS files
-We will not elaborate in much detail about our CSS files, as they just contain properties that enhance the looks and aesthetics of our web app. We did use Boostrap for much of our CSS.
+We will not elaborate in much detail about our CSS files, as they just contain properties that enhance the looks and aesthetics of our web app. We did use Bootstrap for much of our CSS.
