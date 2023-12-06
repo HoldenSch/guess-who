@@ -53,7 +53,7 @@ Once in the game board, share the game code that pops up with your friends! If y
 
 If you want some demo boards, here are the username/password of some examples
 Username: Sunny | Password: Liu -> Demo board with Pokemon
-Username: Animal | Password: Animal -> Demo board with Animals
+Username: animal | Password: animal -> Demo board with animals
 
 ## Section 4: Video Demo
 https://youtu.be/KMx_znlUkG8
