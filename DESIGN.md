@@ -50,5 +50,8 @@ If the players forget the join code or their secret character, we decided to add
 
 When the players are done playing the game, they can click “Settings” and either click “Home” (directs to home page) or “Logout” (clears their session ID and directs to login page)
 
-## 7) Various CSS files
+## 7) server.js
+We've mentioned this JavaScript file in a couple of the previous sections, as many of the other JavaScript files will reference this one. This file is the main file that connects to our MySQL database through Axios calls and queries. It will constantly listen to port 8081, which is where the commands come from. This file is the most important backend piece, as it is integral to storing user, character, and game information into SQL databases.
+
+## 8) Various CSS files
 We will not elaborate in much detail about our CSS files, as they just contain properties that enhance the looks and aesthetics of our web app. We did use Bootstrap for much of our CSS.
