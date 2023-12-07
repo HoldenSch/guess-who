@@ -51,8 +51,10 @@ Then, once logged in, you can create a game by clicking the “Create Private Ro
 
 Once in the game board, share the game code that pops up with your friends! If your friend has installed this game on another computer, they can log in and join the same game by inputting the code into the “Enter game code” on the homepage. Once your friend and you are in the game, you can play the game by asking your opponent “yes-or-no” questions about their secret character, and then narrow down your list by clicking on the cards to flip them over. Have fun!
 
-If you want some demo boards, here are the username/password of some examples
+If you want some demo boards, here are the username/password of some examples:
+
 Username: Sunny | Password: Liu -> Demo board with Pokemon
+
 Username: animal | Password: animal -> Demo board with animals
 
 ## Section 4: Video Demo
