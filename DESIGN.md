@@ -1,6 +1,6 @@
 # Guess Who Design Implementation
 
-Our project was mainly built using JavaScript files that we will elaborate in greater detail below. 
+Our project was mainly built using JavaScript files, located in the 'Components' folder, that we will elaborate in greater detail below. 
 
 ## 1) App.js
 App.js is our central app that connects all the JavaScript component files and their relative URL paths.
