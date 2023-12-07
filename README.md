@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4) With Node.js/npm downloaded, run npm install (`npm install`) in the guess-who directory. This will install all packages needed for this directory.
 5) From the guess-who directory, cd into the backend folder (`cd backend`)
 6) Run npm install again (`npm install`), which will install all packages for the backend directory.
-7) Cd back to the guess-who folder (`cd ..`) and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view.
+7) Cd back to the guess-who folder (`cd ..`) and run npm (`npm start`), which will run app in development mode. You should receive a “webpack compiled successfully” message in the terminal window and http://localhost:3000/ should automatically pop up on your web browser. If it doesn't automatically pop up, simply open [http://localhost:3000](http://localhost:3000) in your browser to view. Sometimes, http://localhost:3000/home would automatically pop up on your web browser instead of the main page. If that's the case, then simply navigate to http://localhost:3000/.
 8) Click the "+" to add a new terminal window. Then cd into the backend folder (`cd backend`) and run npm (`npm start`). This will let the server listen through port 8081. To make sure it’s listening, check the terminal, which should say in green:
 “[nodemon] starting `node server.js`
 listening”
