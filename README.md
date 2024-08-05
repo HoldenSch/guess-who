@@ -1,7 +1,6 @@
 # Guess Who Create React App
 
 Backend Repository: https://github.com/HoldenSch/aws-guess-who
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Section 1: Downloading and compiling source code
 1) Download source code from GitHub (https://github.com/HoldenSch/guess-who/tree/main) onto Visual Studio Code (or some other source-code editor) using Git (`git clone https://github.com/HoldenSch/guess-who.git`). If you don't have git, please follow directions to install it here: https://git-scm.com/downloads
